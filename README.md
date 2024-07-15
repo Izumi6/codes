@@ -1,4 +1,5 @@
 # codes
+![Visitor Count](https://profile-counter.glitch.me/getsomesleepbro_codes/count.svg)
 
 <br>
 

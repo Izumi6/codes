@@ -1,12 +1,7 @@
 # TCP (lan) based chatting app
 
-# ref:
-# - https://www.neuralnine.com/tcp-chat-in-python/ 
-# - https://www.geeksforgeeks.org/simple-chat-room-using-python/
-
-
 # --------------------------------------------------------------
-# 							server.py
+#                           server.py
 # --------------------------------------------------------------
 
 

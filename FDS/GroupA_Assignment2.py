@@ -23,7 +23,7 @@ Conditions for placing the values in the matrix in appropriate manner (CIRCULAR 
    3. If the calculated row position is -1 & calculated column position is n, the new position would be: (0, n-2).
 '''
 
-#<------------------------------------------ END OF PROGRAM ----------------------------------------->
+#<------------------------------------------ START OF PROGRAM ----------------------------------------->
 
 # A function to generate odd sized magic squares
 def generate_Magic_Square(size):

@@ -1,5 +1,5 @@
 '''
-Experiment No. 7 : Write a python program for MAGIC SQUARE.
+Assignment No. 2 : Write a python program for MAGIC SQUARE.
                    A magic square is an n*n matrix of the integers 1 to (n^2) such that the sum of each row,
                    column and diagonals the same.
                    The figure given below is an example of the magic square for case n=5. In this example
@@ -23,7 +23,7 @@ Conditions for placing the values in the matrix in appropriate manner (CIRCULAR 
    3. If the calculated row position is -1 & calculated column position is n, the new position would be: (0, n-2).
 '''
 
-#<------------------------------------------------------------------------------------------------->
+#<------------------------------------------ END OF PROGRAM ----------------------------------------->
 
 # A function to generate odd sized magic squares
 def generate_Magic_Square(size):

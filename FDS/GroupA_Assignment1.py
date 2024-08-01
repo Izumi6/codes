@@ -1,5 +1,5 @@
 '''
-Experiment No. 1 : In a second year computer engineering class, group A students play cricket, group B students play
+Assignment No. 3 : In a second year computer engineering class, group A students play cricket, group B students play
                    badminton and group C students play football.
                    Write a python program using functions to compute following:
                    a) List of students who play both cricket and badminton.
@@ -9,7 +9,7 @@ Experiment No. 1 : In a second year computer engineering class, group A students
 (NOTE : While realising the group, duplicate entries should be avoided. Do not use SET built-in functions)
 '''
 
-#<------------------------------------------------------------------------------------------------->
+#<------------------------------------------ START OF PROGRAM ----------------------------------------->
 
 def remove_duplicates(lst):
     new_lst = []

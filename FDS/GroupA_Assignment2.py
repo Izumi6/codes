@@ -30,18 +30,18 @@ def generate_Magic_Square(size):
     magic_square=[[0 for x in range(size)] for y in range(size)]
 
     # Initializing first position of matrix
-    i=int(size/2)
-    j=size-1
+    i=int(size/2) # First row
+    j=size-1      # Middle column
 
     # Fill the magic square by placing values at appropriate position
     for num in range(1, size*size + 1): # range(start, end, step)
         magic_square[i][j] = num
-        new_i, new_j = (i - 1) % size, (j + 1) % size
+        new_i, new_j = (i - 1) % size, (j + 1) % size # move to next position: up & right
         
         # Check if the next cell is already filled or out of bounds
         if magic_square[new_i][new_j] != 0:
             new_i = (i + 1) % size  # Move down
-            new_j = j  # Stay in the same column
+            new_j = j               # Stay in the same column
         
         i, j = new_i, new_j
 

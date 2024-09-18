@@ -1,15 +1,13 @@
 '''
-
-
-Experiment Number 14: Write a python program to store first year percentage of students in an array.
+Assignment 5: Write a python program to store first year percentage of students in an array.
                       Write function for sorting array of floating point numbers in ascending order using:
                       a) Selection Sort
                       b) Bubble Sort and display top five scores
 '''
 
+#<------------------------------------------ START OF PROGRAM ----------------------------------------->
 
 # Function for Selection Sort of elements
-
 def Selection_Sort(marks):
     for i in range(len(marks)):
 
@@ -29,7 +27,6 @@ def Selection_Sort(marks):
 #<--------------------------------------------------------------------------------------->
 
 # Function for Bubble Sort of elements
-
 def Bubble_Sort(marks):
     n = len(marks)
     # Traverse through all array elements
@@ -98,10 +95,12 @@ while True:
         break
 
 
-#<----------------------------------------END OF PROGRAM------------------------------------------------->
+#<------------------------------------------ END OF PROGRAM ----------------------------------------->
 
 
-# OUTPUT
+
+
+#<-------------------------------------------- OUTPUT ----------------------------------------------->
 
 '''
 Enter number of students whose marks are to be displayed : 5

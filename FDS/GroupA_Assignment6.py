@@ -1,10 +1,10 @@
 '''
-
-Experiment No. 16 : Write a python program to store first year percentage of students in array.
+Assignment 6: Write a python program to store first year percentage of students in array.
                     Write function for sorting array of floating point numbers in ascending order using
                     quick sort and display top five scores.
 '''
 
+#<------------------------------------------ START OF PROGRAM ----------------------------------------->
 
 # Function to accept the percentage of the students
 def input_percentage():
@@ -14,10 +14,14 @@ def input_percentage():
         perc.append(float(input(f"Enter the percentage of Student {i+1}: ")))
     return perc
 
+#<------------------------------------------------------------------------------------------------->
+
 # Function to print the percentages of the students
 def print_percentage(perc):
     for p in perc:
         print(p)
+
+#<------------------------------------------------------------------------------------------------->
 
 # Function to perform partitioning for Quick Sort
 def percentage_partition(perc, start, end):
@@ -40,6 +44,8 @@ def percentage_partition(perc, start, end):
     perc[start], perc[upper_bound] = perc[upper_bound], perc[start]
     return upper_bound
 
+#<------------------------------------------------------------------------------------------------->
+
 # Function to perform Quick Sort
 def quick_sort(perc, start, end):
     if start < end:
@@ -48,11 +54,15 @@ def quick_sort(perc, start, end):
         quick_sort(perc, partition_index + 1, end)
     return perc
 
+#<------------------------------------------------------------------------------------------------->
+
 # Function to display the top five percentages
 def display_top_five(perc):
     print("Top Five Percentages are:")
     for p in perc[-5:]:
         print(p)
+
+#<------------------------------------------------------------------------------------------------->
 
 # Main program
 def main():
@@ -88,14 +98,17 @@ def main():
         else:
             print("Invalid Choice!!")
 
+#<------------------------------------------------------------------------------------------------->
+
 # Run the main program
 if __name__ == "__main__":
     main()
 
+#<------------------------------------------ END OF PROGRAM ----------------------------------------->
 
 
 
-# OUTPUT
+#<-------------------------------------------- OUTPUT ----------------------------------------------->
 
 '''
 --------------------MENU--------------------

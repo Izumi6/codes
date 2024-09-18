@@ -61,6 +61,7 @@ def generate_Magic_Square(size):
 
 #<------------------------------------------------------------------------------------------------->
 
+# We are using Siamese method for odd-orders (only)
 while True:
     n=int(input("\nEnter the size of the MAGIC SQUARE : "))
     if n%2==0:

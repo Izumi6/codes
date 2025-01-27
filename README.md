@@ -4,7 +4,8 @@
 
 <br>
 
-#### .this
+> DSA | Semester 4 | SE | Comp Eng | SPPU
+#### .this-repo 
   - [Data Structures & Algorithms | DSA](./DSA)
 
 #### Reference:
@@ -15,10 +16,18 @@
 
 <br><br><hr><br><br>
 
-#### .this
+> FDS | Semester 3 | SE | Comp Eng | SPPU
+#### .this-repo 
   - [Fundamental in Data Structures | FDS](./FDS)
 
 #### Reference:
   - [SPPU-2019-Pattern-SE-COMP-Fundamentals-of-Data-Structures-Practicals](https://github.com/Parth1906/SPPU-2019-Pattern-SE-COMP-Fundamentals-of-Data-Structures-Practicals)
   - [SPPU-2019-Pattern-SE-COMP-Computer-Graphics-Practicals](https://github.com/Parth1906/SPPU-2019-Pattern-SE-COMP-Computer-Graphics-Practicals)
   - [SPPU-2019-Pattern-SE-COMP-Object-Oriented-Programming-Practicals](https://github.com/Parth1906/SPPU-2019-Pattern-SE-COMP-Object-Oriented-Programming-Practicals)
+
+
+<br><br><hr><br><br>
+
+> OOPCG | Semester 3 | SE | Comp Eng | SPPU
+#### .this-repo 
+  - [Fundamental in Data Structures | FDS](./OOPCG)

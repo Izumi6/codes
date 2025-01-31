@@ -4,7 +4,7 @@
 
 <br><br>
 
-## Semester 4 | SE | Comp Eng | SPPU
+## Semester 4 | SE 
 
 ### ▶️ [Data Structures & Algorithms | DSA](./DSA)
 #### Reference:
@@ -13,9 +13,16 @@
   - https://github.com/khan-mujeeb/DSAL-CPP
 
 
+<br><br>
+
+### ▶️ [Microprocessor | MP](./MP)
+#### Reference:
+  - https://github.com/Abhigharat12/Microprocessor-practical-codes-with-outputs-SPPU
+
+
 <br><br><hr><br><br>
 
-##  Semester 3 | SE | Comp Eng | SPPU
+##  Semester 3 | SE 
 
 ### ▶️ [Fundamental in Data Structures | FDS](./FDS)
 #### Reference:

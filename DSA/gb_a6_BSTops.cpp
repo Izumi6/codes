@@ -123,15 +123,18 @@ int main()
     traversal(root);
     cout << endl;
 
+
+    cout << "Height of the tree is " << height(root) << endl;
+    cout << "Minimum value in the BST is " << minimum(root) << endl;
+
+    
     // Mirror the tree
     mirror(root);
     
     cout << "Displaying the elements of the BST after mirroring-\n";
     traversal(root);
     cout << endl;
-
-    cout << "Height of the tree is " << height(root) << endl;
-    cout << "Minimum value in the BST is " << minimum(root) << endl;
+    
      
     int key;
     cout << "Enter the data value to be searched in the BST-\n";

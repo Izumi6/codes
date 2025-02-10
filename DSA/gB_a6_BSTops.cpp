@@ -67,26 +67,17 @@ int minimum(Node* root)
     return root->data;
 }
 
-void search(Node* root, int key, bool &present)
-{
-    if (root == NULL)
-    {
-        return;
+bool searchInBinaryTree(Node* root, int key) {
+    if (root == NULL) {
+        return false;
     }
-    if (root->data == key)
-    {
-        present = true;
-        return; // Stop further recursion once found
+    if (root->data == key) {
+        return true;
     }
-    else if (root->data > key)
-    {
-        search(root->left, key, present);
-    }
-    else
-    {
-        search(root->right, key, present);
-    }
+    // Search both subtrees since the BST property is not guaranteed
+    return searchInBinaryTree(root->left, key) || searchInBinaryTree(root->right, key);
 }
+
 
 void mirror(Node* &root)
 {
@@ -140,15 +131,12 @@ int main()
     cout << "Enter the data value to be searched in the BST-\n";
     cin >> key;
     
-    bool present = false; 
-    search(root, key, present);
-    if (present == true)
-    {
+   
+    if (searchInBinaryTree(root, key)) {
         cout << "Key is present in the BST!" << endl;
-    }
-    else
-    {
+    } else {
         cout << "Key is not present in the BST!" << endl;
     }
+
     return 0;
 }

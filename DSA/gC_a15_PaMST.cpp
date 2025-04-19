@@ -8,7 +8,7 @@ class tree {
 public:
     void input();   // Function to input the graph (branches and connections)
     void display(); // Function to display the adjacency matrix
-    void minimum(); // Function to find the minimum spanning tree using Prim’s algorithm
+    void minimum(); // Function to find the minimum spanning tree using Primâ€™s algorithm
 };
 
 // Function to take input for the graph

@@ -11,14 +11,14 @@ int main()
     cout << "\nEnter the no. of nodes : ";
     cin >> n;
     cout << "\nEnter the probability for successful search :: ";
-    cout << "\n————————————————\n";
+    cout << "\nâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\n";
     for (i = 1; i <= n; i++)
     {
         cout << "p[" << i << "]";
         cin >> a[i];
     }
     cout << "\nEnter the probability for unsuccessful search :: ";
-    cout << "\n————————————————–\n";
+    cout << "\nâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€“\n";
     for (i = 0; i <= n; i++)
     {
         cout << "q[" << i << "]";

@@ -1,8 +1,11 @@
 '''
-Consider telephone book database of N clients. Make use of a hash table
-implementation to quickly look up client‘s telephone number. Make use of two collision
-handling techniques and compare them using number of comparisons required to find a
-set of telephone numbers
+QUESTION:
+    Consider telephone book database of N clients. Make use of a hash table implementation to quickly look up client‘s telephone number. 
+    Make use of two collision handling techniques and compare them using number of comparisons required to find a set of telephone numbers.
+
+OUTPUT:
+    Chaining       - Telephone number for key 123456 : John Doe
+    Linear Probing - Telephone number for key 123456 : John Doe
 '''
 
 class TelephoneBook:
@@ -57,5 +60,5 @@ telephone_book_linear_probing.insert(345678, 'Michael Johnson')
 
 # Searching for a telephone number
 key = 123456
-print("Chaining - Telephone number for key", key, ":", telephone_book_chaining.search(key))
+print("Chaining       - Telephone number for key", key, ":", telephone_book_chaining.search(key))
 print("Linear Probing - Telephone number for key", key, ":", telephone_book_linear_probing.search(key))

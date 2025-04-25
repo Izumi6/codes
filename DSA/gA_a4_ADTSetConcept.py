@@ -1,14 +1,23 @@
 '''
-To create ADT that implement the "set" concept.
-a. Add (newElement) -Place a value into the set
-b. Remove (element) Remove the value
-c. Contains (element) Return true if element is in collection
-d. Size () Return number of values in collection Iterator () 
-   Return an iterator used to loop over collection
-e. Intersection of two sets
-f. Union of two sets
-g. Difference between two sets
-h. Subset
+OUESTION:
+   To create ADT that implement the "set" concept.
+   a. Add (newElement) -Place a value into the set
+   b. Remove (element) Remove the value
+   c. Contains (element) Return true if element is in collection
+   d. Size () Return number of values in collection Iterator () 
+      Return an iterator used to loop over collection
+   e. Intersection of two sets
+   f. Union of two sets
+   g. Difference between two sets
+   h. Subset
+
+OUTPUT:
+   Set 1: [1, 2, 3]
+   Set 2: [3, 4, 5]
+   Intersection: [3]
+   Union: [1, 2, 3, 4, 5]
+   Difference (Set 1 - Set 2): [1, 2]
+   Set 1 is Not a Subset of Set 2
 '''
 
 class Set:

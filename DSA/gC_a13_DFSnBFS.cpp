@@ -1,3 +1,36 @@
+/*
+OUESTION:
+    Represent a given graph using adjacency matrix/list to perform DFS and using adjacency
+    list to perform BFS. Use the map of the area around the college as the graph. Identify
+    the prominent land marks as nodes and perform DFS and BFS on that.
+
+OUTPUT:
+    Enter no. of cities: 3
+    Enter city #0 (Airport Code): 111
+    Enter city #1 (Airport Code): 222
+    Enter city #2 (Airport Code): 333
+    
+    Your cities are: 
+    city #0: 111
+    city #1: 222
+    city #2: 333
+    Enter distance between 111 and 222 : 1
+    Enter distance between 111 and 333 : 2
+    Enter distance between 222 and 333 : 3
+    
+            111             222             333
+    111     0               1               2
+    
+    222     1               0               3
+    
+    333     2               3               0
+    Enter Starting Vertex: 2
+    DFS: 333 111 222 
+    BFS: 333 111 222 
+
+*/
+
+
 #include <iostream>     // Includes the input/output stream library
 #include <queue>        // Includes the queue data structure library
 

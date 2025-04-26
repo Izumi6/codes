@@ -1,3 +1,49 @@
+/*
+QUESTION:
+    Department maintains a student information. The file contains roll number, name,
+    division and address. Allow user to add, delete information of student. Display
+    information of particular employee. If record of student does not exist an appropriate
+    message is displayed. If it is, then the system displays the student details. Use sequential
+    file to main the data.
+
+OUTPUT:
+    ----- Student Information System -----
+    1. Add Student
+    2. Delete Student
+    3. Display Student
+    4. Quit
+    Enter your choice: 1
+    Enter Roll Number: 1
+    Enter Name: ADMIN
+    Enter Division: A
+    Enter Address: XYZ
+    
+    ----- Student Information System -----
+    1. Add Student
+    2. Delete Student
+    3. Display Student
+    4. Quit
+    Enter your choice: 1
+    Enter Roll Number: 10
+    Enter Name: PAUL
+    Enter Division: C
+    Enter Address: ABC
+    
+    ----- Student Information System -----
+    1. Add Student
+    2. Delete Student
+    3. Display Student
+    4. Quit
+    Enter your choice: 3
+    Enter Roll Number of student to display: 10
+    Roll Number: 10
+    Name: PAUL
+    Division: C
+    Address: ABC
+
+*/
+
+
 #include <iostream>
 #include <fstream>
 #include <cstring>

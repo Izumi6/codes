@@ -1,3 +1,59 @@
+/*
+OUESTION:
+    You have a business with several offices; you want to lease phone lines to connect them
+    up with each other; and the phone company charges different amounts of money to
+    connect different pairs of cities. You want a set of lines that connects all your offices
+    with a minimum total cost. Solve the problem by suggesting appropriate data structures.
+
+OUTPUT:
+    ========== PRIM'S ALGORITHM =================
+    
+    1. INPUT
+    2. DISPLAY
+    3. MINIMUM
+    
+    Enter your choice: 1
+    ******* INPUT YOUR VALUES *******
+    Enter the number of branches: 3
+    
+    Enter the number of connections: 2
+    Enter the end branches of connection: 
+    2
+    1
+    Enter the phone company charges for this connection: 12
+    Enter the end branches of connection: 
+    5
+    4
+    Enter the phone company charges for this connection: 43
+    ========== PRIM'S ALGORITHM =================
+    
+    1. INPUT
+    2. DISPLAY
+    3. MINIMUM
+    
+    Enter your choice: 2
+    ******* DISPLAY THE CONTENTS *******
+    
+    Adjacency matrix:
+    999   12   999   
+    
+    12   999   999   
+    
+    999   999   999   
+    ========== PRIM'S ALGORITHM =================
+    
+    1. INPUT
+    2. DISPLAY
+    3. MINIMUM
+    
+    Enter your choice: 3
+    ********* MINIMUM ************
+    Minimum cost connection is 1 -> 2  with charge : 12
+    Minimum cost connection is 1 -> 2  with charge : 999
+    The minimum total cost of connections of all branches is: 1011
+*/
+
+
 #include <iostream>  // Include the standard input-output stream library
 using namespace std; // Using the standard namespace to avoid prefixing std::
 

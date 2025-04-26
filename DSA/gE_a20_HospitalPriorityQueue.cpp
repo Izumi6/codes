@@ -1,3 +1,47 @@
+/*
+QUESTION:
+    Consider a scenario for Hospital to cater services to different kinds of patients as Serious
+    (top priority), b) non-serious (medium priority), c) General Checkup (Least priority).
+    Implement the priority queue to cater services to the patients.
+
+OUTPUT:
+    Hospital Management System
+    1. Add Patient
+    2. Serve Patient
+    3. Display Patients
+    4. Exit
+    Enter your choice: 1
+    Enter patient name: ADMIN
+    Enter patient priority: 1
+    Patient added successfully.
+    Hospital Management System
+    1. Add Patient
+    2. Serve Patient
+    3. Display Patients
+    4. Exit
+    Enter your choice: 1
+    Enter patient name: SOUL
+    Enter patient priority: 4
+    Patient added successfully.
+    Hospital Management System
+    1. Add Patient
+    2. Serve Patient
+    3. Display Patients
+    4. Exit
+    Enter your choice: 2
+    Serving patient: ADMIN
+    Hospital Management System
+    1. Add Patient
+    2. Serve Patient
+    3. Display Patients
+    4. Exit
+    Enter your choice: 3
+    Patients in the queue:
+    Name: SOUL, Priority: 4
+
+*/
+
+
 #include <iostream>
 #include <queue>
 #include <string>

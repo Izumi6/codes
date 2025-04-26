@@ -1,3 +1,38 @@
+/*
+QUESTION:
+    Given sequence k = k1 <k2 < … <kn of n sorted keys, with a search probability pi for each
+    key ki . Build the Binary search tree that has the least search cost given the access
+    probability for each key?
+
+OUTPUT:
+    ****** PROGRAM FOR OBST ******
+    
+    Enter the no. of nodes : 4
+    
+    Enter the probability for successful search :: 
+    ————————————————
+    p[1]1
+    p[2]2
+    p[3]3
+    p[4]4
+    
+    Enter the probability for unsuccessful search :: 
+    ————————————————–
+    q[0]9
+    q[1]8
+    q[2]7
+    q[3]6
+    q[4]5
+    
+    Optimal BST is :: 
+    w[0][4] :: 45
+    c[0][4] :: 103
+    r[0][4] :: 2
+     Left child of 2 :: 1
+     Right child of 2 :: 3
+     Right child of 3 :: 4
+*/
+
 #include <iostream>
 using namespace std;
 void con_obst(void);

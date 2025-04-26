@@ -1,18 +1,55 @@
 /*
-Employee Information Management System using Index Sequential File Organization
+QUESTION:
+    Company maintains employee information as employee ID, name, designation and
+    salary. Allow user to add, delete information of employee. Display information of
+    particular employee. If employee does not exist an appropriate message is displayed. If
+    it is, then the system displays the employee details. Use index sequential file to maintain
+    the data.
 
-Functionality:
-- Add employee
-- Search employee
-- Delete employee
-- Display all employees
-
-Files Used:
-- ind_employee_data.dat : stores employee records
-- ind_employee_index.dat : stores index records (key = empId, value = position in data file)
-
-Developed and Explained for Educational Purpose
+OUTPUT:
+    --- MAIN MENU ---
+    1 -> Add employee
+    2 -> Search employee
+    3 -> Delete employee
+    4 -> Display all
+    5 -> Exit
+    Choose an option (1-5): 1
+    Employee ID:    1
+    Name:   ADMIN
+    Designation:    BOSS
+    Salary: Rs. 100000
+    Employee added successfully.
+    
+    --- MAIN MENU ---
+    1 -> Add employee
+    2 -> Search employee
+    3 -> Delete employee
+    4 -> Display all
+    5 -> Exit
+    Choose an option (1-5): 1
+    Employee ID:    10
+    Name:   SAMUL
+    Designation:    DEVELOPER
+    Salary: Rs. 50000
+    Employee added successfully.
+    
+    --- MAIN MENU ---
+    1 -> Add employee
+    2 -> Search employee
+    3 -> Delete employee
+    4 -> Display all
+    5 -> Exit
+    Choose an option (1-5): 2
+    Employee ID:    10
+    --- EMPLOYEE FOUND ---
+    ID:     10
+    Name:   SAMUL
+    Designation:    DEVELOPER
+    Salary: Rs. 50000
+    --- END OF RECORD ---
 */
+
+
 #include <string.h>
 #include <fstream>
 #include <iostream>

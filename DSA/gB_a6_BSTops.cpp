@@ -1,3 +1,30 @@
+/*
+OUESTION:
+    Beginning with an empty binary search tree, Construct binary search tree by inserting
+    the values in the order given. After constructing a binary tree -
+    i. Insert new node, ii. Find number of nodes in longest path from root, iii. Minimum data
+    value found in the tree, iv. Change a tree so that the roles of the left and right pointers
+    are swapped at every node, v. Search a value
+
+
+OUTPUT:
+    Enter the data value to be inserted-
+    12
+    Enter the data value to be inserted-
+    32
+    Enter the data value to be inserted-
+    14
+    Enter the data value to be inserted-
+    51
+    Displaying the elements of the BST before mirroring-
+    12 32 14 51 
+    Height of the tree is 3
+    Minimum value in the BST is 12
+    Displaying the elements of the BST after mirroring-
+    12 32 51 14 
+*/
+
+
 #include<bits/stdc++.h>
 using namespace std;
 

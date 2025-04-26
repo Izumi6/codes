@@ -1,3 +1,16 @@
+/*
+OUESTION:
+    Convert given binary tree into threaded binary tree. Analyze time and space complexity of the algorithm.
+
+
+OUTPUT:
+    Enter tree nodes in pre-order (-1 for NULL):
+    50 37 75 -1 -1 -1 -1 
+    Inorder traversal of the double-threaded binary tree:
+    75 37 50 
+
+*/
+
 #include <iostream>
 using namespace std;
 

@@ -10,30 +10,23 @@ This repository contains fully tested, standardized, and clean implementations o
 LP 3/
 ├── Machine Learning/
 │   ├── 01_Uber_Fare_Prediction/
-│   │   ├── 01_uber_fare_prediction.py
 │   │   ├── 01_uber_fare_prediction.ipynb
 │   │   └── uber.csv
 │   ├── 02_Email_Spam_Classification/
-│   │   ├── 02_email_spam_classification.py
 │   │   ├── 02_email_spam_classification.ipynb
 │   │   └── emails.csv
 │   ├── 03_Bank_Churn_Neural_Network/
-│   │   ├── 03_bank_churn_neural_network.py
 │   │   ├── 03_bank_churn_neural_network.ipynb
 │   │   └── Churn_Modelling.csv
 │   ├── 04_Gradient_Descent/
-│   │   ├── 04_gradient_descent.py
 │   │   └── 04_gradient_descent.ipynb
 │   ├── 05_KNN_Diabetes/
-│   │   ├── 05_knn_diabetes.py
 │   │   ├── 05_knn_diabetes.ipynb
 │   │   └── diabetes.csv
 │   ├── 06_KMeans_Clustering_Sales/
-│   │   ├── 06_kmeans_clustering_sales.py
 │   │   ├── 06_kmeans_clustering_sales.ipynb
 │   │   └── sales_data_sample.csv
 │   └── Mini Project/
-│       ├── 01_titanic_survival_prediction.py
 │       ├── 01_titanic_survival_prediction.ipynb
 │       └── titanic.csv
 │
@@ -80,7 +73,7 @@ LP 3/
 
 ## 🤖 1. Machine Learning (ML) Practicals
 
-All Machine Learning assignments include both a standalone Python script (`.py`) and a fully documented Jupyter Notebook (`.ipynb`). Both formats run seamlessly in **VS Code** and **Jupyter Notebook**.
+All Machine Learning assignments are provided as clean, standalone **Jupyter Notebooks (`.ipynb`)**. They run seamlessly in **VS Code** (with the Jupyter extension), **JupyterLab / Notebook**, and **Google Colab**.
 
 | Assignment | Title | Algorithm / Technique | Dataset |
 | :--- | :--- | :--- | :--- |
@@ -93,11 +86,11 @@ All Machine Learning assignments include both a standalone Python script (`.py`)
 | **Mini Project** | Titanic Survival Prediction | Random Forest Classification with Feature Importance | `titanic.csv` |
 
 ### How to Run:
-- **In VS Code Terminal**:
+- **In VS Code**: Simply click on any `.ipynb` file in the sidebar and click **"Run All"** (or use `Shift + Enter` to step through cells).
+- **In Jupyter Notebook**:
   ```bash
-  python3 "Machine Learning/01_Uber_Fare_Prediction/01_uber_fare_prediction.py"
+  jupyter notebook "LP 3/Machine Learning/01_Uber_Fare_Prediction/01_uber_fare_prediction.ipynb"
   ```
-- **In VS Code / Jupyter Notebook**: Open any `.ipynb` file directly in VS Code (using the built-in Jupyter extension) and click **"Run All"**.
 
 ---
 

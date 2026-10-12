@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# macOS system files
+.DS_Store
+
+# Large archives and unused datasets (> 100MB exceeds GitHub push limit)
+*.zip
+*.tar.gz
+archive (2).zip
+Machine Learning/archive (2).zip
+Machine Learning/Data/
+Data/
+
+# Environments
+.env
+.venv
+venv/

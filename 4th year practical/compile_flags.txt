@@ -1,0 +1,3 @@
+-I/opt/homebrew/opt/libomp/include
+-Xpreprocessor
+-fopenmp

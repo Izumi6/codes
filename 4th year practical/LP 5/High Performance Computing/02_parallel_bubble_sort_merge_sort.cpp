@@ -1,371 +1,216 @@
-/**
- * ======================================================================================
- *   Laboratory Practice 5 (LP 5): High Performance Computing (410250)
- *   Practical 2: Parallel Bubble Sort and Merge Sort using OpenMP
- * ======================================================================================
+/*
+ * ==============================================================================
+ * LP-5 Practical 2: Parallel Bubble Sort and Merge Sort using OpenMP
  * 
- *   Problem Statement:
- *     Write a program to implement Parallel Bubble Sort and Merge sort using OpenMP.
- *     Use existing algorithms and measure the performance of sequential and parallel
- *     algorithms.
+ * Problem Statement:
+ *   Write a program to implement Parallel Bubble Sort and Merge sort using OpenMP.
+ *   Use existing algorithms and measure the performance of sequential and
+ *   parallel algorithms.
  * 
- *   Approach:
- *     1. Sequential Bubble Sort:
- *        - Standard O(n^2) comparison-based sorting.
- *     2. Parallel Bubble Sort (Odd-Even Transposition Sort):
- *        - Iterates over odd and even phases:
- *          * Even Phase: Compares and swaps adjacent elements at even indices (i, i+1).
- *          * Odd Phase : Compares and swaps adjacent elements at odd indices (i, i+1).
- *        - Both phases are parallelized across threads using #pragma omp parallel for.
- *     3. Sequential Merge Sort:
- *        - Divide-and-conquer O(n log n) sorting.
- *     4. Parallel Merge Sort:
- *        - Recursive divide-and-conquer using OpenMP tasks (#pragma omp task).
- *        - Left and right sub-arrays are processed concurrently by separate worker threads
- *          when sub-array size exceeds a cutoff threshold (to avoid task-spawning overhead).
- *     5. Performance Measurement:
- *        - Benchmarks execution time of both algorithms on identical random datasets.
- *        - Calculates and displays speedup = (T_sequential / T_parallel).
+ * How to Compile & Run:
+ *   - On Windows (MinGW GCC):
+ *       g++ -fopenmp 02_parallel_bubble_sort_merge_sort.cpp -o 02_parallel_bubble_sort_merge_sort.exe
+ *       02_parallel_bubble_sort_merge_sort.exe
  * 
- *   Compilation Commands:
- *     - Linux (GCC):
- *         g++ -O2 -fopenmp 02_parallel_bubble_sort_merge_sort.cpp -o 02_parallel_bubble_sort_merge_sort
- *     - macOS (Apple Clang with Homebrew libomp):
- *         clang++ -O2 -Xpreprocessor -fopenmp -I/opt/homebrew/opt/libomp/include \
- *                 -L/opt/homebrew/opt/libomp/lib -lomp 02_parallel_bubble_sort_merge_sort.cpp -o 02_parallel_bubble_sort_merge_sort
- * 
- *   Execution Command:
- *     ./02_parallel_bubble_sort_merge_sort
- * ======================================================================================
+ *   - On Linux / Ubuntu:
+ *       g++ -fopenmp 02_parallel_bubble_sort_merge_sort.cpp -o 02_parallel_bubble_sort_merge_sort
+ *       ./02_parallel_bubble_sort_merge_sort
+ * ==============================================================================
  */
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <chrono>
+#include <cstdlib>
 #include <iomanip>
-#include <random>
-
-#ifdef _OPENMP
 #include <omp.h>
-#endif
 
-// ============================================================================
+using namespace std;
+
+// -------------------------------------------------------------
 // 1. Sequential Bubble Sort
-// ============================================================================
-void sequentialBubbleSort(std::vector<int>& arr) {
-    int n = static_cast<int>(arr.size());
-    for (int i = 0; i < n - 1; ++i) {
-        bool swapped = false;
-        for (int j = 0; j < n - i - 1; ++j) {
+// -------------------------------------------------------------
+void sequentialBubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
             if (arr[j] > arr[j + 1]) {
-                std::swap(arr[j], arr[j + 1]);
-                swapped = true;
+                swap(arr[j], arr[j + 1]);
             }
         }
-        if (!swapped) break;
     }
 }
 
-// ============================================================================
-// 2. Parallel Bubble Sort (Odd-Even Transposition Sort using OpenMP)
-// ============================================================================
-void parallelBubbleSort(std::vector<int>& arr) {
-    int n = static_cast<int>(arr.size());
-    #pragma omp parallel
-    {
-        for (int phase = 0; phase < n; ++phase) {
-            if (phase % 2 == 0) {
-                // Even Phase: Compare and swap at even indices
-                #pragma omp for schedule(static)
-                for (int i = 0; i < n - 1; i += 2) {
-                    if (arr[i] > arr[i + 1]) {
-                        std::swap(arr[i], arr[i + 1]);
-                    }
+// -------------------------------------------------------------
+// 2. Parallel Bubble Sort (Odd-Even Transposition Sort)
+// -------------------------------------------------------------
+void parallelBubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int phase = 0; phase < n; phase++) {
+        // Even phase: compare elements at even indices (0, 2, 4...)
+        if (phase % 2 == 0) {
+            #pragma omp parallel for
+            for (int i = 0; i < n - 1; i += 2) {
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr[i], arr[i + 1]);
                 }
-            } else {
-                // Odd Phase: Compare and swap at odd indices
-                #pragma omp for schedule(static)
-                for (int i = 1; i < n - 1; i += 2) {
-                    if (arr[i] > arr[i + 1]) {
-                        std::swap(arr[i], arr[i + 1]);
-                    }
+            }
+        }
+        // Odd phase: compare elements at odd indices (1, 3, 5...)
+        else {
+            #pragma omp parallel for
+            for (int i = 1; i < n - 1; i += 2) {
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr[i], arr[i + 1]);
                 }
             }
         }
     }
 }
 
-// ============================================================================
-// 3. Sequential Merge Sort
-// ============================================================================
-void merge(std::vector<int>& arr, int left, int mid, int right, std::vector<int>& temp) {
-    int i = left;
-    int j = mid + 1;
-    int k = left;
+// -------------------------------------------------------------
+// Merge Helper Function
+// -------------------------------------------------------------
+void merge(vector<int>& arr, int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
 
-    while (i <= mid && j <= right) {
-        if (arr[i] <= arr[j]) {
-            temp[k++] = arr[i++];
+    vector<int> L(n1), R(n2);
+    for (int i = 0; i < n1; i++) L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++) R[j] = arr[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k++] = L[i++];
         } else {
-            temp[k++] = arr[j++];
+            arr[k++] = R[j++];
         }
     }
-    while (i <= mid) {
-        temp[k++] = arr[i++];
-    }
-    while (j <= right) {
-        temp[k++] = arr[j++];
-    }
-    for (int p = left; p <= right; ++p) {
-        arr[p] = temp[p];
+    while (i < n1) arr[k++] = L[i++];
+    while (j < n2) arr[k++] = R[j++];
+}
+
+// -------------------------------------------------------------
+// 3. Sequential Merge Sort
+// -------------------------------------------------------------
+void sequentialMergeSort(vector<int>& arr, int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        sequentialMergeSort(arr, left, mid);
+        sequentialMergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
     }
 }
 
-void sequentialMergeSortHelper(std::vector<int>& arr, int left, int right, std::vector<int>& temp) {
-    if (left >= right) return;
-    int mid = left + (right - left) / 2;
-    sequentialMergeSortHelper(arr, left, mid, temp);
-    sequentialMergeSortHelper(arr, mid + 1, right, temp);
-    merge(arr, left, mid, right, temp);
-}
+// -------------------------------------------------------------
+// 4. Parallel Merge Sort using OpenMP Sections
+// -------------------------------------------------------------
+void parallelMergeSort(vector<int>& arr, int left, int right, int depth = 0) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
 
-void sequentialMergeSort(std::vector<int>& arr) {
-    std::vector<int> temp(arr.size());
-    sequentialMergeSortHelper(arr, 0, static_cast<int>(arr.size()) - 1, temp);
-}
+        // Parallelize left and right recursive calls for initial levels
+        if (depth < 4) {
+            #pragma omp parallel sections
+            {
+                #pragma omp section
+                parallelMergeSort(arr, left, mid, depth + 1);
 
-// ============================================================================
-// 4. Parallel Merge Sort using OpenMP Tasks
-// ============================================================================
-const int MERGE_SORT_CUTOFF = 10000; // Switch to sequential below this threshold
-
-void parallelMergeSortHelper(std::vector<int>& arr, int left, int right, std::vector<int>& temp) {
-    if (left >= right) return;
-
-    int mid = left + (right - left) / 2;
-
-    if (right - left < MERGE_SORT_CUTOFF) {
-        sequentialMergeSortHelper(arr, left, mid, temp);
-        sequentialMergeSortHelper(arr, mid + 1, right, temp);
-    } else {
-        #pragma omp task shared(arr, temp)
-        parallelMergeSortHelper(arr, left, mid, temp);
-
-        #pragma omp task shared(arr, temp)
-        parallelMergeSortHelper(arr, mid + 1, right, temp);
-
-        #pragma omp taskwait
-    }
-    merge(arr, left, mid, right, temp);
-}
-
-void parallelMergeSort(std::vector<int>& arr) {
-    std::vector<int> temp(arr.size());
-    #pragma omp parallel
-    {
-        #pragma omp single
-        {
-            parallelMergeSortHelper(arr, 0, static_cast<int>(arr.size()) - 1, temp);
+                #pragma omp section
+                parallelMergeSort(arr, mid + 1, right, depth + 1);
+            }
+        } else {
+            sequentialMergeSort(arr, left, mid);
+            sequentialMergeSort(arr, mid + 1, right);
         }
+        merge(arr, left, mid, right);
     }
 }
 
-// ============================================================================
-// Helper: Print Array
-// ============================================================================
-void printArray(const std::string& label, const std::vector<int>& arr, size_t limit = 10) {
-    std::cout << "  " << std::left << std::setw(25) << label << ": [ ";
-    size_t count = std::min(arr.size(), limit);
-    for (size_t i = 0; i < count; ++i) {
-        std::cout << arr[i] << (i + 1 < count ? ", " : "");
+// Helper to print array elements
+void printArray(const vector<int>& arr, int limit = 10) {
+    int count = min((int)arr.size(), limit);
+    for (int i = 0; i < count; i++) {
+        cout << arr[i] << " ";
     }
-    if (arr.size() > limit) {
-        std::cout << ", ... (" << arr.size() << " items)";
-    }
-    std::cout << " ]\n";
+    if ((int)arr.size() > limit) cout << "... (" << arr.size() << " total)";
+    cout << endl;
 }
 
-// ============================================================================
-// Main Function
-// ============================================================================
 int main() {
-    std::cout << "================================================================================" << std::endl;
-    std::cout << "  LP-5 High Performance Computing: Practical 2" << std::endl;
-    std::cout << "  Parallel Bubble Sort and Merge Sort using OpenMP" << std::endl;
-    std::cout << "================================================================================" << std::endl;
+    cout << "=================================================" << endl;
+    cout << "  LP-5 Practical 2: Bubble Sort & Merge Sort" << endl;
+    cout << "=================================================" << endl;
 
-#ifdef _OPENMP
-    std::cout << "  OpenMP Active: Using " << omp_get_max_threads() << " threads." << std::endl;
-#else
-    std::cout << "  OpenMP Not Enabled: Running in sequential mode." << std::endl;
-#endif
+    // Small demonstration to show sorting works
+    vector<int> demo = {64, 34, 25, 12, 22, 11, 90, 88, 45, 50};
+    cout << "Original Small Array: ";
+    printArray(demo);
 
-    // ------------------------------------------------------------------------
-    // Part A: Correctness Verification on Small Array (10 Elements)
-    // ------------------------------------------------------------------------
-    std::cout << "\n--------------------------------------------------------------------------------" << std::endl;
-    std::cout << "  Part A: Verification on Small Array (10 Elements)" << std::endl;
-    std::cout << "--------------------------------------------------------------------------------" << std::endl;
+    vector<int> demoBubble = demo;
+    parallelBubbleSort(demoBubble);
+    cout << "Bubble Sorted Array : ";
+    printArray(demoBubble);
 
-    std::vector<int> demoArray = {64, 34, 25, 12, 22, 11, 90, 88, 45, 50};
-    printArray("Original Array", demoArray);
+    vector<int> demoMerge = demo;
+    parallelMergeSort(demoMerge, 0, demoMerge.size() - 1);
+    cout << "Merge Sorted Array  : ";
+    printArray(demoMerge);
+    cout << endl;
 
-    auto bubbleCopySeq = demoArray;
-    auto bubbleCopyPar = demoArray;
-    auto mergeCopySeq = demoArray;
-    auto mergeCopyPar = demoArray;
+    // Performance Comparison on larger arrays
+    int nBubble = 5000;
+    int nMerge = 50000;
 
-    sequentialBubbleSort(bubbleCopySeq);
-    parallelBubbleSort(bubbleCopyPar);
-    sequentialMergeSort(mergeCopySeq);
-    parallelMergeSort(mergeCopyPar);
+    vector<int> arrBubble1(nBubble), arrMerge1(nMerge);
+    for (int i = 0; i < nBubble; i++) arrBubble1[i] = rand() % 10000;
+    for (int i = 0; i < nMerge; i++)  arrMerge1[i]  = rand() % 100000;
 
-    printArray("Sequential Bubble Sort", bubbleCopySeq);
-    printArray("Parallel Bubble Sort", bubbleCopyPar);
-    printArray("Sequential Merge Sort", mergeCopySeq);
-    printArray("Parallel Merge Sort", mergeCopyPar);
+    vector<int> arrBubble2 = arrBubble1;
+    vector<int> arrMerge2  = arrMerge1;
 
-    // ------------------------------------------------------------------------
-    // Part B: Performance Benchmark - Bubble Sort (N = 20,000)
-    // ------------------------------------------------------------------------
-    const int BUBBLE_N = 20000;
-    std::cout << "\n--------------------------------------------------------------------------------" << std::endl;
-    std::cout << "  Part B: Performance Benchmark - Bubble Sort (N = " << BUBBLE_N << ")" << std::endl;
-    std::cout << "--------------------------------------------------------------------------------" << std::endl;
+    cout << "--- Bubble Sort Performance (N = " << nBubble << ") ---" << endl;
+    double start = omp_get_wtime();
+    sequentialBubbleSort(arrBubble1);
+    double end = omp_get_wtime();
+    cout << "Sequential Bubble Sort Time: " << fixed << setprecision(4) << (end - start) << " seconds" << endl;
 
-    std::mt19937 rng(42);
-    std::uniform_int_distribution<int> dist(1, 1000000);
+    start = omp_get_wtime();
+    parallelBubbleSort(arrBubble2);
+    end = omp_get_wtime();
+    cout << "Parallel Bubble Sort Time  : " << fixed << setprecision(4) << (end - start) << " seconds" << endl;
 
-    std::vector<int> bubbleDataSeq(BUBBLE_N);
-    for (int i = 0; i < BUBBLE_N; ++i) {
-        bubbleDataSeq[i] = dist(rng);
-    }
-    std::vector<int> bubbleDataPar = bubbleDataSeq;
+    cout << "\n--- Merge Sort Performance (N = " << nMerge << ") ---" << endl;
+    start = omp_get_wtime();
+    sequentialMergeSort(arrMerge1, 0, arrMerge1.size() - 1);
+    end = omp_get_wtime();
+    cout << "Sequential Merge Sort Time : " << fixed << setprecision(4) << (end - start) << " seconds" << endl;
 
-    std::cout << "  Running Sequential Bubble Sort..." << std::flush;
-    auto t1 = std::chrono::high_resolution_clock::now();
-    sequentialBubbleSort(bubbleDataSeq);
-    auto t2 = std::chrono::high_resolution_clock::now();
-    double timeSeqBubble = std::chrono::duration<double, std::milli>(t2 - t1).count();
-    std::cout << " Done (" << std::fixed << std::setprecision(2) << timeSeqBubble << " ms)" << std::endl;
+    start = omp_get_wtime();
+    parallelMergeSort(arrMerge2, 0, arrMerge2.size() - 1);
+    end = omp_get_wtime();
+    cout << "Parallel Merge Sort Time   : " << fixed << setprecision(4) << (end - start) << " seconds" << endl;
 
-    std::cout << "  Running Parallel Bubble Sort (Odd-Even)..." << std::flush;
-    t1 = std::chrono::high_resolution_clock::now();
-    parallelBubbleSort(bubbleDataPar);
-    t2 = std::chrono::high_resolution_clock::now();
-    double timeParBubble = std::chrono::duration<double, std::milli>(t2 - t1).count();
-    std::cout << " Done (" << std::fixed << std::setprecision(2) << timeParBubble << " ms)" << std::endl;
-
-    double speedupBubble = (timeParBubble > 0) ? (timeSeqBubble / timeParBubble) : 1.0;
-    std::cout << "  Verification : " 
-              << (std::is_sorted(bubbleDataPar.begin(), bubbleDataPar.end()) ? "PASSED (Sorted)" : "FAILED") << std::endl;
-    std::cout << "  Speedup      : " << std::fixed << std::setprecision(2) << speedupBubble << "x" << std::endl;
-
-    // ------------------------------------------------------------------------
-    // Part C: Performance Benchmark - Merge Sort (N = 1,000,000)
-    // ------------------------------------------------------------------------
-    const int MERGE_N = 1000000;
-    std::cout << "\n--------------------------------------------------------------------------------" << std::endl;
-    std::cout << "  Part C: Performance Benchmark - Merge Sort (N = " << MERGE_N << ")" << std::endl;
-    std::cout << "--------------------------------------------------------------------------------" << std::endl;
-
-    std::vector<int> mergeDataSeq(MERGE_N);
-    for (int i = 0; i < MERGE_N; ++i) {
-        mergeDataSeq[i] = dist(rng);
-    }
-    std::vector<int> mergeDataPar = mergeDataSeq;
-
-    std::cout << "  Running Sequential Merge Sort..." << std::flush;
-    t1 = std::chrono::high_resolution_clock::now();
-    sequentialMergeSort(mergeDataSeq);
-    t2 = std::chrono::high_resolution_clock::now();
-    double timeSeqMerge = std::chrono::duration<double, std::milli>(t2 - t1).count();
-    std::cout << " Done (" << std::fixed << std::setprecision(2) << timeSeqMerge << " ms)" << std::endl;
-
-    std::cout << "  Running Parallel Merge Sort (OpenMP Tasks)..." << std::flush;
-    t1 = std::chrono::high_resolution_clock::now();
-    parallelMergeSort(mergeDataPar);
-    t2 = std::chrono::high_resolution_clock::now();
-    double timeParMerge = std::chrono::duration<double, std::milli>(t2 - t1).count();
-    std::cout << " Done (" << std::fixed << std::setprecision(2) << timeParMerge << " ms)" << std::endl;
-
-    double speedupMerge = (timeParMerge > 0) ? (timeSeqMerge / timeParMerge) : 1.0;
-    std::cout << "  Verification : " 
-              << (std::is_sorted(mergeDataPar.begin(), mergeDataPar.end()) ? "PASSED (Sorted)" : "FAILED") << std::endl;
-    std::cout << "  Speedup      : " << std::fixed << std::setprecision(2) << speedupMerge << "x" << std::endl;
-
-    // ------------------------------------------------------------------------
-    // Summary Comparison Table
-    // ------------------------------------------------------------------------
-    std::cout << "\n================================================================================" << std::endl;
-    std::cout << "  PERFORMANCE COMPARISON SUMMARY" << std::endl;
-    std::cout << "================================================================================" << std::endl;
-    std::cout << "  " << std::left << std::setw(22) << "Algorithm"
-              << std::setw(15) << "Input Size"
-              << std::setw(18) << "Sequential (ms)"
-              << std::setw(18) << "Parallel (ms)"
-              << std::setw(12) << "Speedup" << std::endl;
-    std::cout << "  " << std::string(80, '-') << std::endl;
-
-    std::cout << "  " << std::left << std::setw(22) << "Bubble Sort (Odd-Even)"
-              << std::setw(15) << BUBBLE_N
-              << std::fixed << std::setprecision(2)
-              << std::setw(18) << timeSeqBubble
-              << std::setw(18) << timeParBubble
-              << std::setw(12) << (std::to_string(speedupBubble).substr(0, 4) + "x") << std::endl;
-
-    std::cout << "  " << std::left << std::setw(22) << "Merge Sort (Task-based)"
-              << std::setw(15) << MERGE_N
-              << std::fixed << std::setprecision(2)
-              << std::setw(18) << timeSeqMerge
-              << std::setw(18) << timeParMerge
-              << std::setw(12) << (std::to_string(speedupMerge).substr(0, 4) + "x") << std::endl;
-    std::cout << "================================================================================" << std::endl;
-
+    cout << "=================================================" << endl;
     return 0;
 }
 
-/**
- * ============================== SAMPLE OUTPUT ==============================
- * 
- * ================================================================================
- *   LP-5 High Performance Computing: Practical 2
- *   Parallel Bubble Sort and Merge Sort using OpenMP
- * ================================================================================
- *   OpenMP Active: Using 8 threads.
- * 
- * --------------------------------------------------------------------------------
- *   Part A: Verification on Small Array (10 Elements)
- * --------------------------------------------------------------------------------
- *   Original Array           : [ 64, 34, 25, 12, 22, 11, 90, 88, 45, 50 ]
- *   Sequential Bubble Sort   : [ 11, 12, 22, 25, 34, 45, 50, 64, 88, 90 ]
- *   Parallel Bubble Sort     : [ 11, 12, 22, 25, 34, 45, 50, 64, 88, 90 ]
- *   Sequential Merge Sort    : [ 11, 12, 22, 25, 34, 45, 50, 64, 88, 90 ]
- *   Parallel Merge Sort      : [ 11, 12, 22, 25, 34, 45, 50, 64, 88, 90 ]
- * 
- * --------------------------------------------------------------------------------
- *   Part B: Performance Benchmark - Bubble Sort (N = 20000)
- * --------------------------------------------------------------------------------
- *   Running Sequential Bubble Sort... Done (122.73 ms)
- *   Running Parallel Bubble Sort (Odd-Even)... Done (367.97 ms)
- *   Verification : PASSED (Sorted)
- *   Speedup      : 0.33x
- * 
- * --------------------------------------------------------------------------------
- *   Part C: Performance Benchmark - Merge Sort (N = 1000000)
- * --------------------------------------------------------------------------------
- *   Running Sequential Merge Sort... Done (46.80 ms)
- *   Running Parallel Merge Sort (OpenMP Tasks)... Done (18.94 ms)
- *   Verification : PASSED (Sorted)
- *   Speedup      : 2.47x
- * 
- * ================================================================================
- *   PERFORMANCE COMPARISON SUMMARY
- * ================================================================================
- *   Algorithm             Input Size     Sequential (ms)   Parallel (ms)     Speedup     
- *   --------------------------------------------------------------------------------
- *   Bubble Sort (Odd-Even)20000          122.73            367.97            0.33x       
- *   Merge Sort (Task-based)1000000        46.80             18.94             2.47x       
- * ================================================================================
- */
+/*
+============================== SAMPLE OUTPUT ==============================
+=================================================
+  LP-5 Practical 2: Bubble Sort & Merge Sort
+=================================================
+Original Small Array: 64 34 25 12 22 11 90 88 45 50 
+Bubble Sorted Array : 11 12 22 25 34 45 50 64 88 90 
+Merge Sorted Array  : 11 12 22 25 34 45 50 64 88 90 
+
+--- Bubble Sort Performance (N = 5000) ---
+Sequential Bubble Sort Time: 0.0125 seconds
+Parallel Bubble Sort Time  : 0.0210 seconds
+
+--- Merge Sort Performance (N = 50000) ---
+Sequential Merge Sort Time : 0.0078 seconds
+Parallel Merge Sort Time   : 0.0039 seconds
+=================================================
+===========================================================================
+*/

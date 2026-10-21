@@ -123,37 +123,5 @@ def main():
         pred_mean = [round(float(predicted_colors[i, :, :, c].mean()), 2) for c in range(3)]
         print(f"Sample {i+1}: Original Color = {orig_mean}, Colorized = {pred_mean}")
 
-    # 9. Generate and Save Visual Comparison (B&W Input vs Colorized vs Original)
-    try:
-        import matplotlib.pyplot as plt
-        fig, axes = plt.subplots(3, 3, figsize=(8, 7))
-        col_titles = ['Grayscale Input (B&W)', 'Colorized (Autoencoder)', 'Original Color (Target)']
-
-        preds_clip = np.clip(predicted_colors[:3], 0.0, 1.0)
-        for i in range(3):
-            axes[i, 0].imshow(X_test_gray[i].squeeze(), cmap='gray')
-            axes[i, 0].axis('off')
-            if i == 0:
-                axes[i, 0].set_title(col_titles[0], fontsize=11, fontweight='bold')
-
-            axes[i, 1].imshow(preds_clip[i])
-            axes[i, 1].axis('off')
-            if i == 0:
-                axes[i, 1].set_title(col_titles[1], fontsize=11, fontweight='bold', color='#1f77b4')
-
-            axes[i, 2].imshow(y_test_color[i])
-            axes[i, 2].axis('off')
-            if i == 0:
-                axes[i, 2].set_title(col_titles[2], fontsize=11, fontweight='bold', color='#2ca02c')
-
-        plt.tight_layout()
-        plot_path = os.path.join(os.path.dirname(__file__), 'colorization_comparison.png')
-        plt.savefig(plot_path, dpi=120)
-        print(f"\nVisual comparison saved as 'colorization_comparison.png'")
-        plt.close()
-    except Exception as e:
-        pass
-
 if __name__ == '__main__':
     main()
-

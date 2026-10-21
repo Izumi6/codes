@@ -14,8 +14,13 @@ This repository contains workable, clean, and simple implementations for all Dee
 | **2** | Movie Review Sentiment Classification | Deep Neural Network (DNN) Binary Classification | IMDB Movie Reviews (Top 10,000 words) | [02_imdb_movie_review_classification.py](02_IMDB_Movie_Review_Classification/02_imdb_movie_review_classification.py) | [02_imdb_movie_review_classification.ipynb](02_IMDB_Movie_Review_Classification/02_imdb_movie_review_classification.ipynb) | [Training Metrics Plot](02_IMDB_Movie_Review_Classification/imdb_training_metrics.png) |
 | **3** | Fashion Clothing Classification | Convolutional Neural Network (CNN) | Fashion MNIST (10 Clothing Categories) | [03_fashion_mnist_cnn.py](03_Fashion_MNIST_CNN/03_fashion_mnist_cnn.py) | [03_fashion_mnist_cnn.ipynb](03_Fashion_MNIST_CNN/03_fashion_mnist_cnn.ipynb) | — |
 | **4** | Google Stock Price Forecasting | Recurrent Neural Network (RNN / SimpleRNN) | Google Stock Price (`Train` & `Test` CSV) | [04_google_stock_price_rnn.py](04_Google_Stock_Price_RNN/04_google_stock_price_rnn.py) | [04_google_stock_price_rnn.ipynb](04_Google_Stock_Price_RNN/04_google_stock_price_rnn.ipynb) | [Stock Price Forecast Plot](04_Google_Stock_Price_RNN/google_stock_price_prediction.png) |
+| **5** | Human Face Recognition | Convolutional Neural Network (CNN) | Olivetti Faces (400 images, 40 subjects) | [05_human_face_recognition.py](mini%20projects%20of%20deep%20learning/05_Human_Face_Recognition/05_human_face_recognition.py) | [05_human_face_recognition.ipynb](mini%20projects%20of%20deep%20learning/05_Human_Face_Recognition/05_human_face_recognition.ipynb) | — |
+| **6** | Gender and Age Detection | Multi-Output Deep Neural Network | Facial Biometrics (`facial_biometric_data.csv`) | [06_gender_and_age_detection.py](mini%20projects%20of%20deep%20learning/06_Gender_and_Age_Detection/06_gender_and_age_detection.py) | [06_gender_and_age_detection.ipynb](mini%20projects%20of%20deep%20learning/06_Gender_and_Age_Detection/06_gender_and_age_detection.ipynb) | — |
+| **7** | Colorizing Old B&W Images | Convolutional Autoencoder (Encoder-Decoder) | Natural Scenery Patches (B&W $\to$ RGB) | [07_colorizing_bw_images.py](mini%20projects%20of%20deep%20learning/07_Colorizing_BW_Images/07_colorizing_bw_images.py) | [07_colorizing_bw_images.ipynb](mini%20projects%20of%20deep%20learning/07_Colorizing_BW_Images/07_colorizing_bw_images.ipynb) | — |
 
 ---
+
+See [mini projects of deep learning/README.md](mini%20projects%20of%20deep%20learning/README.md) for detailed documentation on the mini projects.
 
 ## Detailed Practical Descriptions
 

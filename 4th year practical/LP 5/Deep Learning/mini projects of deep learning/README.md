@@ -6,11 +6,11 @@ This folder contains clean, self-contained, and exam-oriented implementations of
 
 ## Mini Projects Overview
 
-| No. | Project Title | Deep Learning Architecture | Dataset | Script | Notebook |
-|:---:|:---|:---|:---|:---|:---|
-| **5** | **Human Face Recognition** | Convolutional Neural Network (CNN) Classifier | Olivetti Faces (400 images, 40 subjects, 64x64) | [05_human_face_recognition.py](05_Human_Face_Recognition/05_human_face_recognition.py) | [05_human_face_recognition.ipynb](05_Human_Face_Recognition/05_human_face_recognition.ipynb) |
-| **6** | **Gender and Age Detection** | Multi-Output Deep Neural Network (Multi-Task Learning) | Facial Biometric Ratios (`facial_biometric_data.csv`) | [06_gender_and_age_detection.py](06_Gender_and_Age_Detection/06_gender_and_age_detection.py) | [06_gender_and_age_detection.ipynb](06_Gender_and_Age_Detection/06_gender_and_age_detection.ipynb) |
-| **7** | **Colorizing Old B&W Images** | Convolutional Autoencoder (Encoder-Decoder) | Natural Scenery Patches (B&W $\to$ RGB Color) | [07_colorizing_bw_images.py](07_Colorizing_BW_Images/07_colorizing_bw_images.py) | [07_colorizing_bw_images.ipynb](07_Colorizing_BW_Images/07_colorizing_bw_images.ipynb) |
+| No. | Project Title | Deep Learning Architecture | Dataset | Script | Notebook | Visual Graph |
+|:---:|:---|:---|:---|:---|:---|:---|
+| **5** | **Human Face Recognition** | Convolutional Neural Network (CNN) Classifier | Olivetti Faces (400 images, 40 subjects, 64x64) | [05_human_face_recognition.py](05_Human_Face_Recognition/05_human_face_recognition.py) | [05_human_face_recognition.ipynb](05_Human_Face_Recognition/05_human_face_recognition.ipynb) | — |
+| **6** | **Gender and Age Detection** | Multi-Output Deep Neural Network (Multi-Task Learning) | Facial Biometric Ratios (`facial_biometric_data.csv`) | [06_gender_and_age_detection.py](06_Gender_and_Age_Detection/06_gender_and_age_detection.py) | [06_gender_and_age_detection.ipynb](06_Gender_and_Age_Detection/06_gender_and_age_detection.ipynb) | — |
+| **7** | **Colorizing Old B&W Images** | Convolutional Autoencoder (Encoder-Decoder) | Natural Scenery Patches (B&W $\to$ RGB Color) | [07_colorizing_bw_images.py](07_Colorizing_BW_Images/07_colorizing_bw_images.py) | [07_colorizing_bw_images.ipynb](07_Colorizing_BW_Images/07_colorizing_bw_images.ipynb) | [Colorization Comparison](07_Colorizing_BW_Images/colorization_comparison.png) |
 
 ---
 

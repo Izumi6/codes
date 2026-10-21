@@ -103,27 +103,5 @@ def main():
         pred_label = class_names[predictions[i]]
         print(f"Sample {i+1}: True = {true_label}, Predicted = {pred_label}")
 
-    # 8. Generate and Save Prediction Image Grid
-    try:
-        import matplotlib.pyplot as plt
-        plt.figure(figsize=(13, 3.2))
-        for i in range(5):
-            plt.subplot(1, 5, i + 1)
-            plt.imshow(X_test[i].squeeze(), cmap='gray')
-            true_label = class_names[y_test[i]]
-            pred_label = class_names[predictions[i]]
-            color = 'green' if true_label == pred_label else 'red'
-            plt.title(f"Pred: {pred_label}\nTrue: {true_label}", color=color, fontsize=10, fontweight='bold')
-            plt.axis('off')
-
-        plt.tight_layout()
-        plot_path = os.path.join(os.path.dirname(__file__), 'fashion_mnist_predictions.png')
-        plt.savefig(plot_path, dpi=120)
-        print(f"Plot saved as 'fashion_mnist_predictions.png'")
-        plt.close()
-    except Exception as e:
-        pass
-
 if __name__ == '__main__':
     main()
-

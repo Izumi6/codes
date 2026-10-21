@@ -136,5 +136,26 @@ def main():
         diff = abs(actual - predicted)
         print(f"{date_val} -> Actual: {actual:.2f}, Predicted: {predicted:.2f}, Difference: {diff:.2f}")
 
+    # 12. Generate and Save Plot
+    try:
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(12, 6))
+        plt.plot(actual_test_prices, color='#e74c3c', linewidth=2, label='Real Google Stock Price')
+        plt.plot(predicted_prices, color='#2980b9', linewidth=2, linestyle='--', label='Predicted Google Stock Price (RNN)')
+        plt.title('Google Stock Price Prediction using Recurrent Neural Network (RNN)', fontsize=13, fontweight='bold')
+        plt.xlabel('Time (Trading Days)', fontsize=11)
+        plt.ylabel('Google Stock Price ($)', fontsize=11)
+        plt.legend(fontsize=11)
+        plt.grid(True, linestyle='--', alpha=0.5)
+
+        plt.tight_layout()
+        plot_path = os.path.join(os.path.dirname(__file__), 'google_stock_price_prediction.png')
+        plt.savefig(plot_path, dpi=120)
+        print(f"Plot saved as 'google_stock_price_prediction.png'")
+        plt.close()
+    except Exception as e:
+        pass
+
 if __name__ == '__main__':
     main()
+

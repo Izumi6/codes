@@ -111,5 +111,35 @@ def main():
         diff = abs(y_test[i] - y_pred[i])
         print(f"Sample {i+1}: Actual = {y_test[i]:.2f}, Predicted = {y_pred[i]:.2f}, Difference = {diff:.2f}")
 
+    # 10. Generate and Save Plot
+    try:
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(12, 5))
+
+        plt.subplot(1, 2, 1)
+        plt.plot(history.history['loss'], color='#1f77b4', linewidth=2, label='Training Loss (MSE)')
+        plt.title('Training Loss over Epochs')
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss (MSE)')
+        plt.grid(True, linestyle='--', alpha=0.5)
+        plt.legend()
+
+        plt.subplot(1, 2, 2)
+        plt.scatter(y_test, y_pred, color='#2ca02c', alpha=0.7, edgecolors='k', label='Predicted vs Actual')
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', linewidth=2, label='Ideal Fit')
+        plt.title('Actual vs Predicted Housing Prices')
+        plt.xlabel('Actual Price ($1000s)')
+        plt.ylabel('Predicted Price ($1000s)')
+        plt.grid(True, linestyle='--', alpha=0.5)
+        plt.legend()
+
+        plt.tight_layout()
+        plot_path = os.path.join(os.path.dirname(__file__), 'boston_housing_prediction.png')
+        plt.savefig(plot_path, dpi=120)
+        print(f"Plot saved as 'boston_housing_prediction.png'")
+        plt.close()
+    except Exception as e:
+        pass
+
 if __name__ == '__main__':
     main()

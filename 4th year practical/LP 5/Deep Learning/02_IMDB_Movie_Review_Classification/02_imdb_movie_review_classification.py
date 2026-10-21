@@ -104,5 +104,37 @@ def main():
         conf = predictions[i] if predicted == "Positive" else (1 - predictions[i])
         print(f"Review {i+1}: Actual = {actual}, Predicted = {predicted} (Confidence: {conf:.2f})")
 
+    # 8. Generate and Save Plot
+    try:
+        import matplotlib.pyplot as plt
+        epochs = range(1, len(history.history['loss']) + 1)
+
+        plt.figure(figsize=(12, 4.5))
+
+        plt.subplot(1, 2, 1)
+        plt.plot(epochs, history.history['loss'], 'o-', color='#d62728', linewidth=2, label='Training Loss')
+        plt.title('Training Loss over Epochs')
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss (Binary Crossentropy)')
+        plt.grid(True, linestyle='--', alpha=0.5)
+        plt.legend()
+
+        plt.subplot(1, 2, 2)
+        plt.plot(epochs, [acc * 100 for acc in history.history['accuracy']], 's-', color='#1f77b4', linewidth=2, label='Training Accuracy')
+        plt.title('Training Accuracy over Epochs')
+        plt.xlabel('Epochs')
+        plt.ylabel('Accuracy (%)')
+        plt.grid(True, linestyle='--', alpha=0.5)
+        plt.legend()
+
+        plt.tight_layout()
+        plot_path = os.path.join(os.path.dirname(__file__), 'imdb_training_metrics.png')
+        plt.savefig(plot_path, dpi=120)
+        print(f"Plot saved as 'imdb_training_metrics.png'")
+        plt.close()
+    except Exception as e:
+        pass
+
 if __name__ == '__main__':
     main()
+

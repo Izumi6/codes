@@ -104,18 +104,11 @@ def main():
     print("   8-QUEENS PROBLEM — BACKTRACKING")
     print("=" * 60)
 
-    print("\n  Place the first Queen on the board (press Enter for default Row 1, Col 1).")
-    try:
-        input_row = input("  Enter row    (1-8, default 1): ").strip()
-    except EOFError:
-        input_row = ""
-    row = (int(input_row) - 1) if input_row else 0
-
-    try:
-        input_col = input("  Enter column (1-8, default 1): ").strip()
-    except EOFError:
-        input_col = ""
-    col = (int(input_col) - 1) if input_col else 0
+    print("\n  Place the first Queen on the board [Press Enter for default: (1, 1)].")
+    user_row = input("  Enter row    (1-8) [Default: 1]: ").strip()
+    row = (int(user_row) - 1) if user_row else 0
+    user_col = input("  Enter column (1-8) [Default: 1]: ").strip()
+    col = (int(user_col) - 1) if user_col else 0
 
     if not (0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE):
         print("\n  [Error] Row and column must be between 1 and 8.")

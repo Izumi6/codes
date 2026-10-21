@@ -99,18 +99,12 @@ def main():
     print("   BINOMIAL COEFFICIENTS — DYNAMIC PROGRAMMING")
     print("=" * 65)
 
-    try:
-        user_input_n = input("\n  Enter the value of n (press Enter for default 5): ").strip()
-    except EOFError:
-        user_input_n = ""
-    n = int(user_input_n) if user_input_n else 5
-
-    try:
-        user_input_k = input("  Enter the value of k (k ≤ n, press Enter for default 2): ").strip()
-    except EOFError:
-        user_input_k = ""
-    k = int(user_input_k) if user_input_k else 2
-    print(f"  Calculating C({n}, {k})...")
+    user_n = input("\n  Enter the value of n [Default: 5]: ").strip()
+    n = int(user_n) if user_n else 5
+    user_k = input(f"  Enter the value of k (k ≤ {n}) [Default: 2]: ").strip()
+    k = int(user_k) if user_k else 2
+    if not user_n and not user_k:
+        print(f"  [Using default textbook sample: n = {n}, k = {k}]")
 
     if k > n:
         print("\n  [Error] k cannot be greater than n.")

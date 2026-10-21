@@ -90,12 +90,9 @@ def main():
     print("   JOB SEQUENCING WITH DEADLINES — GREEDY METHOD")
     print("=" * 60)
 
-    try:
-        user_input = input("\n  Enter the number of jobs (press Enter for default 5 jobs): ").strip()
-    except EOFError:
-        user_input = ""
+    user_input = input("\n  Enter the number of jobs [Press Enter for default sample (5 jobs)]: ").strip()
     if not user_input:
-        print("  Using default sample jobs: J1(d=2, p=100), J2(d=1, p=19), J3(d=2, p=27), J4(d=1, p=25), J5(d=3, p=15)")
+        print("  [Using default textbook sample: 5 jobs]")
         jobs = [
             Job(job_id="J1", deadline=2, profit=100),
             Job(job_id="J2", deadline=1, profit=19),

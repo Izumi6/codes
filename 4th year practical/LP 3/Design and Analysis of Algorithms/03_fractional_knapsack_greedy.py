@@ -79,12 +79,9 @@ def main():
     print("   FRACTIONAL KNAPSACK PROBLEM — GREEDY METHOD")
     print("=" * 65)
 
-    try:
-        user_input = input("\n  Enter the number of items (press Enter for default 3 items): ").strip()
-    except EOFError:
-        user_input = ""
+    user_input = input("\n  Enter the number of items [Press Enter for default sample (3 items)]: ").strip()
     if not user_input:
-        print("  Using default sample items: Item 1 (w=10, v=60), Item 2 (w=20, v=100), Item 3 (w=30, v=120) with capacity=50")
+        print("  [Using default textbook sample: Capacity = 50, 3 items]")
         capacity = 50.0
         items = [
             Item(item_id=1, weight=10.0, value=60.0),

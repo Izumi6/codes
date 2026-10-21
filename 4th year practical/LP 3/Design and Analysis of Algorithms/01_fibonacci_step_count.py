@@ -87,12 +87,10 @@ def main():
     print("   FIBONACCI NUMBER CALCULATION WITH STEP COUNT ANALYSIS")
     print("=" * 70)
 
-    try:
-        user_input = input("\n  Enter the value of n (recommended ≤ 30, press Enter for default 10): ").strip()
-    except EOFError:
-        user_input = ""
+    user_input = input("\n  Enter the value of n (recommended ≤ 30 for recursive) [Default: 10]: ").strip()
     n = int(user_input) if user_input else 10
-    print(f"  Using n = {n}")
+    if not user_input:
+        print(f"  [Using default: n = {n}]")
 
     if n < 0:
         print("  [Error] n must be a non-negative integer.")

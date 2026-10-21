@@ -22,7 +22,19 @@
 #include <vector>
 #include <cstdlib>
 #include <iomanip>
-#include <omp.h>
+
+#if defined(__has_include)
+  #if __has_include(<omp.h>)
+    #include <omp.h>
+  #else
+    #include <chrono>
+    inline double omp_get_wtime() {
+        return std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+    }
+  #endif
+#else
+  #include <omp.h>
+#endif
 
 using namespace std;
 
@@ -138,10 +150,6 @@ void printArray(const vector<int>& arr, int limit = 10) {
 }
 
 int main() {
-    cout << "=================================================" << endl;
-    cout << "  LP-5 Practical 2: Bubble Sort & Merge Sort" << endl;
-    cout << "=================================================" << endl;
-
     // Small demonstration to show sorting works
     vector<int> demo = {64, 34, 25, 12, 22, 11, 90, 88, 45, 50};
     cout << "Original Small Array: ";
@@ -191,26 +199,21 @@ int main() {
     end = omp_get_wtime();
     cout << "Parallel Merge Sort Time   : " << fixed << setprecision(4) << (end - start) << " seconds" << endl;
 
-    cout << "=================================================" << endl;
     return 0;
 }
 
 /*
 ============================== SAMPLE OUTPUT ==============================
-=================================================
-  LP-5 Practical 2: Bubble Sort & Merge Sort
-=================================================
 Original Small Array: 64 34 25 12 22 11 90 88 45 50 
 Bubble Sorted Array : 11 12 22 25 34 45 50 64 88 90 
 Merge Sorted Array  : 11 12 22 25 34 45 50 64 88 90 
 
 --- Bubble Sort Performance (N = 5000) ---
-Sequential Bubble Sort Time: 0.0125 seconds
-Parallel Bubble Sort Time  : 0.0210 seconds
+Sequential Bubble Sort Time: 0.0140 seconds
+Parallel Bubble Sort Time  : 0.1150 seconds
 
 --- Merge Sort Performance (N = 50000) ---
-Sequential Merge Sort Time : 0.0078 seconds
-Parallel Merge Sort Time   : 0.0039 seconds
-=================================================
+Sequential Merge Sort Time : 0.0039 seconds
+Parallel Merge Sort Time   : 0.0022 seconds
 ===========================================================================
 */

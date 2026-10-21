@@ -20,7 +20,19 @@
 #include <vector>
 #include <cstdlib>
 #include <iomanip>
-#include <omp.h>
+
+#if defined(__has_include)
+  #if __has_include(<omp.h>)
+    #include <omp.h>
+  #else
+    #include <chrono>
+    inline double omp_get_wtime() {
+        return std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+    }
+  #endif
+#else
+  #include <omp.h>
+#endif
 
 using namespace std;
 
@@ -70,10 +82,6 @@ double parallelAverage(const vector<int>& arr) {
 }
 
 int main() {
-    cout << "=================================================" << endl;
-    cout << "  LP-5 Practical 3: Parallel Reduction" << endl;
-    cout << "=================================================" << endl;
-
     // Part 1: Small Array Demonstration
     vector<int> smallArr = {15, 8, 42, 4, 23, 16, 99, 1, 55, 30};
     cout << "Sample Array: ";
@@ -107,15 +115,11 @@ int main() {
     cout << "  Parallel Avg : " << fixed << setprecision(2) << avgVal << endl;
     cout << "  Total Execution Time: " << fixed << setprecision(4) << (end - start) << " seconds" << endl;
 
-    cout << "=================================================" << endl;
     return 0;
 }
 
 /*
 ============================== SAMPLE OUTPUT ==============================
-=================================================
-  LP-5 Practical 3: Parallel Reduction
-=================================================
 Sample Array: 15 8 42 4 23 16 99 1 55 30 
 
 Results on Sample Array:
@@ -130,6 +134,5 @@ Results on Sample Array:
   Parallel Sum : 500388612
   Parallel Avg : 500.39
   Total Execution Time: 0.0035 seconds
-=================================================
 ===========================================================================
 */

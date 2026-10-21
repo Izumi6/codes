@@ -22,7 +22,19 @@
 #include <vector>
 #include <queue>
 #include <iomanip>
-#include <omp.h>
+
+#if defined(__has_include)
+  #if __has_include(<omp.h>)
+    #include <omp.h>
+  #else
+    #include <chrono>
+    inline double omp_get_wtime() {
+        return std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+    }
+  #endif
+#else
+  #include <omp.h>
+#endif
 
 using namespace std;
 
@@ -182,10 +194,6 @@ public:
 };
 
 int main() {
-    cout << "=================================================" << endl;
-    cout << "  LP-5 Practical 1: Parallel BFS and DFS" << endl;
-    cout << "=================================================" << endl;
-
     // Creating sample undirected graph (7 vertices: 0 to 6)
     //        0
     //       / \
@@ -227,32 +235,26 @@ int main() {
     start = omp_get_wtime();
     g.parallelDFS(0);
     end = omp_get_wtime();
-    cout << "Parallel DFS Time  : " << fixed << setprecision(3) << (end - start) * 1000 << " ms\n" << endl;
+    cout << "Parallel DFS Time  : " << fixed << setprecision(3) << (end - start) * 1000 << " ms" << endl;
 
-    cout << "=================================================" << endl;
     return 0;
 }
 
 /*
 ============================== SAMPLE OUTPUT ==============================
-=================================================
-  LP-5 Practical 1: Parallel BFS and DFS
-=================================================
 Graph created with 7 vertices and 6 edges.
 Starting traversals from vertex 0:
 
 Sequential BFS Traversal: 0 1 2 3 4 5 6 
-Sequential BFS Time: 0.015 ms
+Sequential BFS Time: 0.022 ms
 
-Parallel BFS Traversal  : 0 1 2 3 4 5 6 
-Parallel BFS Time  : 0.280 ms
+Parallel BFS Traversal  : 0 1 2 3 5 4 6 
+Parallel BFS Time  : 1.011 ms
 
 Sequential DFS Traversal: 0 1 3 4 2 5 6 
-Sequential DFS Time: 0.008 ms
+Sequential DFS Time: 0.003 ms
 
-Parallel DFS Traversal  : 0 1 3 4 2 5 6 
-Parallel DFS Time  : 0.350 ms
-
-=================================================
+Parallel DFS Traversal  : 0 1 2 5 6 3 4 
+Parallel DFS Time  : 6.800 ms
 ===========================================================================
 */

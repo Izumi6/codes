@@ -26,7 +26,19 @@
 #include <vector>
 #include <cstdlib>
 #include <iomanip>
-#include <omp.h>
+
+#if defined(__has_include)
+  #if __has_include(<omp.h>)
+    #include <omp.h>
+  #else
+    #include <chrono>
+    inline double omp_get_wtime() {
+        return std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+    }
+  #endif
+#else
+  #include <omp.h>
+#endif
 
 using namespace std;
 
@@ -72,10 +84,6 @@ void parallelForward(const vector<float>& input,
 }
 
 int main() {
-    cout << "=================================================" << endl;
-    cout << "  LP-5 Practical 5: HPC in AI/ML (Neural Net Layer)" << endl;
-    cout << "=================================================" << endl;
-
     // Part 1: Small Demonstration (4 Input Neurons -> 4 Output Neurons)
     int inNodes = 4;
     int outNodes = 4;
@@ -140,15 +148,11 @@ int main() {
     }
     cout << "Verification: " << (match ? "PASSED (Outputs match)" : "FAILED") << endl;
 
-    cout << "=================================================" << endl;
     return 0;
 }
 
 /*
 ============================== SAMPLE OUTPUT ==============================
-=================================================
-  LP-5 Practical 5: HPC in AI/ML (Neural Net Layer)
-=================================================
 Input Feature Vector X: 0.50 -0.20 0.80 0.10 
 
 Sequential Output Neurons (after ReLU): 0.0000 0.6600 0.0400 0.1000 
@@ -158,6 +162,5 @@ Parallel Output Neurons   (after ReLU): 0.0000 0.6600 0.0400 0.1000
 Sequential Inference Time: 6.432 ms
 Parallel Inference Time  : 1.360 ms
 Verification: PASSED (Outputs match)
-=================================================
 ===========================================================================
 */

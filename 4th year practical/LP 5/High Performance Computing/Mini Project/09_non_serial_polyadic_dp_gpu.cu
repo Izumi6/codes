@@ -20,15 +20,6 @@
  *   Without CUDA (Standard g++ / clang++):
  *     g++ -std=c++17 -O2 09_non_serial_polyadic_dp_gpu.cu -o nsp_dp_gpu
  *     ./nsp_dp_gpu
- *
- * Sample Output:
- * Number of Matrices: 6
- * Matrix Dimensions: [40, 20, 30, 10, 30, 20, 50]
- * Optimal Minimum Multiplications: 50000
- * GPU Computed Minimum:           50000
- * Sequential DP Time: 1.04 us
- * GPU Parallel DP Time: 0.71 us
- * Solution Verified: Yes (Matches Exactly)
  */
 
 #include <iostream>
@@ -118,3 +109,14 @@ int main() {
 
     return 0;
 }
+
+/*
+Sample Output:
+Number of Matrices: 6
+Matrix Dimensions: [40, 20, 30, 10, 30, 20, 50]
+Optimal Minimum Multiplications: 50000
+GPU Computed Minimum:           50000
+Sequential DP Time: 1.04 us
+GPU Parallel DP Time: 0.71 us
+Solution Verified: Yes (Matches Exactly)
+*/

@@ -9,20 +9,6 @@ to accurately classify and recognize faces of different individuals.
 Dataset:
 Olivetti Faces dataset (400 grayscale images of 40 distinct individuals,
 10 images per individual, 64x64 pixels)
-
-Sample Output:
-Loaded Faces: 400 images of 40 distinct subjects
-Image Shape: (64, 64, 1)
-Training Faces: 320, Testing Faces: 80
-Test Loss: 0.2326
-Recognition Accuracy: 95.00%
-
-Sample Predictions:
-Sample 1: Actual Subject = Person 2, Recognized as = Person 2 (Match: True)
-Sample 2: Actual Subject = Person 36, Recognized as = Person 36 (Match: True)
-Sample 3: Actual Subject = Person 19, Recognized as = Person 19 (Match: True)
-Sample 4: Actual Subject = Person 17, Recognized as = Person 17 (Match: True)
-Sample 5: Actual Subject = Person 40, Recognized as = Person 40 (Match: True)
 """
 
 import os
@@ -107,3 +93,19 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Loaded Faces: 400 images of 40 distinct subjects
+Image Shape: (64, 64, 1)
+Training Faces: 320, Testing Faces: 80
+Test Loss: 0.2326
+Recognition Accuracy: 95.00%
+
+Sample Predictions:
+Sample 1: Actual Subject = Person 2, Recognized as = Person 2 (Match: True)
+Sample 2: Actual Subject = Person 36, Recognized as = Person 36 (Match: True)
+Sample 3: Actual Subject = Person 19, Recognized as = Person 19 (Match: True)
+Sample 4: Actual Subject = Person 17, Recognized as = Person 17 (Match: True)
+Sample 5: Actual Subject = Person 40, Recognized as = Person 40 (Match: True)
+"""

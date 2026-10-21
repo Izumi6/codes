@@ -12,15 +12,6 @@
  *   Without MPI (Standard C++17 g++ / clang++):
  *     g++ -std=c++17 -O2 06_parallel_quicksort_mpi.cpp -o quicksort_mpi
  *     ./quicksort_mpi
- *
- * Sample Output:
- * Dataset Size: 200000 elements
- * MPI Processes: 4
- * Sequential Time: 17.02 ms
- * Parallel MPI Time: 8.55 ms
- * Speedup Factor: 1.99x
- * Parallel Efficiency: 49.75%
- * Sorted Correctly: Yes
  */
 
 #include <iostream>
@@ -157,3 +148,14 @@ int main(int argc, char** argv) {
     MPI_Finalize();
     return 0;
 }
+
+/*
+Sample Output:
+Dataset Size: 200000 elements
+MPI Processes: 4
+Sequential Time: 18.90 ms
+Parallel MPI Time: 8.05 ms
+Speedup Factor: 2.35x
+Parallel Efficiency: 58.69%
+Sorted Correctly: Yes
+*/

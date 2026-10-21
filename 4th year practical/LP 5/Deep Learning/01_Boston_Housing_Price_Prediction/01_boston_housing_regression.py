@@ -8,21 +8,6 @@ using Deep Neural network. Use Boston House price prediction dataset.
 
 Dataset:
 BostonHousing.csv (506 samples, 13 input features, 1 target variable 'medv')
-
-Sample Output:
-Dataset Shape: (506, 14)
-Training Samples: 404, Testing Samples: 102
-Mean Squared Error (MSE): 11.68
-Root Mean Squared Error (RMSE): 3.42
-Mean Absolute Error (MAE): 2.23
-R2 Score: 0.8408
-
-Sample Predictions (Actual vs Predicted in $1000s):
-Sample 1: Actual = 23.60, Predicted = 27.25, Difference = 3.65
-Sample 2: Actual = 32.40, Predicted = 34.06, Difference = 1.66
-Sample 3: Actual = 13.60, Predicted = 16.83, Difference = 3.23
-Sample 4: Actual = 22.80, Predicted = 26.20, Difference = 3.40
-Sample 5: Actual = 16.10, Predicted = 16.30, Difference = 0.20
 """
 
 import os
@@ -143,3 +128,20 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Dataset Shape: (506, 14)
+Training Samples: 404, Testing Samples: 102
+Mean Squared Error (MSE): 11.68
+Root Mean Squared Error (RMSE): 3.42
+Mean Absolute Error (MAE): 2.23
+R2 Score: 0.8408
+
+Sample Predictions (Actual vs Predicted in $1000s):
+Sample 1: Actual = 23.60, Predicted = 27.25, Difference = 3.65
+Sample 2: Actual = 32.40, Predicted = 34.06, Difference = 1.66
+Sample 3: Actual = 13.60, Predicted = 16.83, Difference = 3.23
+Sample 4: Actual = 22.80, Predicted = 26.20, Difference = 3.40
+Sample 5: Actual = 16.10, Predicted = 16.30, Difference = 0.20
+"""

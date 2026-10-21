@@ -12,20 +12,6 @@
  *   Without CUDA (Standard g++ / clang++):
  *     g++ -std=c++17 -O2 07_huffman_encoding_gpu.cu -o huffman_gpu
  *     ./huffman_gpu
- *
- * Sample Output:
- * Input Text Length: 93 characters (744 bits)
- * Compressed Size: 380 bits
- * Space Saving: 48.92%
- * Compression Ratio: 1.96x
- *
- * Sample Character Codes:
- * Char ' ' -> Code: 011 (Freq: 11)
- * Char 'A' -> Code: 1011 (Freq: 7)
- * Char 'C' -> Code: 1000 (Freq: 6)
- * Char 'D' -> Code: 00010 (Freq: 2)
- * Char 'E' -> Code: 1101 (Freq: 7)
- * Char 'F' -> Code: 11110 (Freq: 4)
  */
 
 #include <iostream>
@@ -133,3 +119,19 @@ int main() {
 
     return 0;
 }
+
+/*
+Sample Output:
+Input Text Length: 93 characters (744 bits)
+Compressed Size: 380 bits
+Space Saving: 48.92%
+Compression Ratio: 1.96x
+
+Sample Character Codes:
+Char ' ' -> Code: 011 (Freq: 11)
+Char 'A' -> Code: 1011 (Freq: 7)
+Char 'C' -> Code: 1000 (Freq: 6)
+Char 'D' -> Code: 00010 (Freq: 2)
+Char 'E' -> Code: 1101 (Freq: 7)
+Char 'F' -> Code: 11110 (Freq: 4)
+*/

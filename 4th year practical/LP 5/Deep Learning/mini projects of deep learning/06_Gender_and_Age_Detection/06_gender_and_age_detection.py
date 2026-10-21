@@ -10,19 +10,6 @@ from facial biometric features.
 Dataset:
 facial_biometric_data.csv (1,000 samples with 10 facial biometric ratios,
 target variables: 'gender' (0: Female, 1: Male) and 'age' in years)
-
-Sample Output:
-Dataset Shape: (1000, 12)
-Training Samples: 800, Testing Samples: 200
-Gender Classification Accuracy: 96.50%
-Age Prediction MAE: 3.42 years
-
-Sample Predictions:
-Sample 1: Gender = [Actual: Male, Predicted: Male] | Age = [Actual: 39.7, Predicted: 36.5]
-Sample 2: Gender = [Actual: Female, Predicted: Female] | Age = [Actual: 64.5, Predicted: 59.8]
-Sample 3: Gender = [Actual: Male, Predicted: Male] | Age = [Actual: 44.4, Predicted: 41.2]
-Sample 4: Gender = [Actual: Male, Predicted: Male] | Age = [Actual: 38.3, Predicted: 39.5]
-Sample 5: Gender = [Actual: Female, Predicted: Female] | Age = [Actual: 72.2, Predicted: 71.4]
 """
 
 import os
@@ -38,6 +25,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, mean_absolute_error
 
 try:
     import keras
@@ -105,25 +93,18 @@ def main():
         verbose=0
     )
 
-    # 8. Evaluate Model
-    results = model.evaluate(
-        X_test_scaled,
-        {'gender': g_test, 'age': a_test},
-        verbose=0
-    )
+    # 8. Evaluate Model on Test Set
+    predictions = model.predict(X_test_scaled, verbose=0)
+    pred_genders = (predictions[0].flatten() >= 0.5).astype(int)
+    pred_ages = predictions[1].flatten()
 
-    # In Keras multi-output evaluation, results contain: [total_loss, gender_loss, age_loss, gender_acc, age_mae]
-    gender_acc = results[3] if len(results) > 3 else 0.965
-    age_mae = results[4] if len(results) > 4 else 3.42
+    gender_acc = accuracy_score(g_test, pred_genders)
+    age_mae = mean_absolute_error(a_test, pred_ages)
 
     print(f"Gender Classification Accuracy: {gender_acc * 100:.2f}%")
     print(f"Age Prediction MAE: {age_mae:.2f} years")
 
     # 9. Sample Predictions
-    predictions = model.predict(X_test_scaled[:5], verbose=0)
-    pred_genders = (predictions[0].flatten() >= 0.5).astype(int)
-    pred_ages = predictions[1].flatten()
-
     print("\nSample Predictions:")
     for i in range(5):
         act_g = "Male" if g_test[i] == 1 else "Female"
@@ -132,3 +113,18 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Dataset Shape: (1000, 12)
+Training Samples: 800, Testing Samples: 200
+Gender Classification Accuracy: 96.50%
+Age Prediction MAE: 3.42 years
+
+Sample Predictions:
+Sample 1: Gender = [Actual: Male, Predicted: Male] | Age = [Actual: 39.7, Predicted: 36.5]
+Sample 2: Gender = [Actual: Female, Predicted: Female] | Age = [Actual: 64.5, Predicted: 59.8]
+Sample 3: Gender = [Actual: Male, Predicted: Male] | Age = [Actual: 44.4, Predicted: 41.2]
+Sample 4: Gender = [Actual: Male, Predicted: Male] | Age = [Actual: 38.3, Predicted: 39.5]
+Sample 5: Gender = [Actual: Female, Predicted: Female] | Age = [Actual: 72.2, Predicted: 71.4]
+"""

@@ -9,21 +9,6 @@ images to colorful (RGB) images using an Encoder-Decoder Convolutional Autoencod
 Dataset:
 Natural scenery image patches (480 patches of 32x32x3 RGB images,
 converted to single-channel B&W grayscale inputs and 3-channel RGB targets)
-
-Sample Output:
-Loaded Color Images: 480 patches (32x32x3)
-Grayscale B&W Input Shape: (480, 32, 32, 1)
-Color Ground Truth Shape: (480, 32, 32, 3)
-Training Samples: 384, Testing Samples: 96
-Colorization Reconstruction MSE: 0.0194
-Colorization Reconstruction MAE: 0.0959
-
-Sample Colorization Results (Mean RGB Intensity [0, 1]):
-Sample 1: Original Color = [0.42, 0.48, 0.35], Colorized = [0.41, 0.46, 0.36]
-Sample 2: Original Color = [0.65, 0.58, 0.49], Colorized = [0.63, 0.57, 0.50]
-Sample 3: Original Color = [0.31, 0.39, 0.28], Colorized = [0.33, 0.38, 0.30]
-Sample 4: Original Color = [0.55, 0.62, 0.51], Colorized = [0.54, 0.60, 0.52]
-Sample 5: Original Color = [0.22, 0.28, 0.24], Colorized = [0.25, 0.27, 0.26]
 """
 
 import os
@@ -125,3 +110,20 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Loaded Color Images: 480 patches (32x32x3)
+Grayscale B&W Input Shape: (480, 32, 32, 1)
+Color Ground Truth Shape: (480, 32, 32, 3)
+Training Samples: 384, Testing Samples: 96
+Colorization Reconstruction MSE: 0.0194
+Colorization Reconstruction MAE: 0.0959
+
+Sample Colorization Results (Mean RGB Intensity [0, 1]):
+Sample 1: Original Color = [0.42, 0.48, 0.35], Colorized = [0.41, 0.46, 0.36]
+Sample 2: Original Color = [0.65, 0.58, 0.49], Colorized = [0.63, 0.57, 0.50]
+Sample 3: Original Color = [0.31, 0.39, 0.28], Colorized = [0.33, 0.38, 0.30]
+Sample 4: Original Color = [0.55, 0.62, 0.51], Colorized = [0.54, 0.60, 0.52]
+Sample 5: Original Color = [0.22, 0.28, 0.24], Colorized = [0.25, 0.27, 0.26]
+"""

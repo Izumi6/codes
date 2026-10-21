@@ -8,19 +8,6 @@ into categories.
 
 Dataset:
 Fashion MNIST (60,000 training images, 10,000 testing images, 28x28 grayscale, 10 classes)
-
-Sample Output:
-Train Images: 60000, Test Images: 10000
-Image Shape: (28, 28, 1), Number of Classes: 10
-Test Loss: 0.3374
-Test Accuracy: 87.99%
-
-Sample Predictions:
-Sample 1: True = Ankle boot, Predicted = Ankle boot
-Sample 2: True = Pullover, Predicted = Pullover
-Sample 3: True = Trouser, Predicted = Trouser
-Sample 4: True = Trouser, Predicted = Trouser
-Sample 5: True = Shirt, Predicted = Shirt
 """
 
 import os
@@ -105,3 +92,18 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Train Images: 60000, Test Images: 10000
+Image Shape: (28, 28, 1), Number of Classes: 10
+Test Loss: 0.3374
+Test Accuracy: 87.99%
+
+Sample Predictions:
+Sample 1: True = Ankle boot, Predicted = Ankle boot
+Sample 2: True = Pullover, Predicted = Pullover
+Sample 3: True = Trouser, Predicted = Trouser
+Sample 4: True = Trouser, Predicted = Trouser
+Sample 5: True = Shirt, Predicted = Shirt
+"""

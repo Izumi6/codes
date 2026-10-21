@@ -9,19 +9,6 @@ just based on the text content of the reviews. Use IMDB dataset.
 Dataset:
 IMDB Movie Reviews Dataset (50,000 labeled reviews: 25,000 train, 25,000 test;
 vocabulary limited to top 10,000 most frequent words)
-
-Sample Output:
-Training Samples: 25000, Testing Samples: 25000
-Vocabulary Size: 10000
-Test Loss: 0.3101
-Test Accuracy: 87.91%
-
-Sample Predictions:
-Review 1: Actual = Negative, Predicted = Negative (Confidence: 0.16)
-Review 2: Actual = Positive, Predicted = Positive (Confidence: 1.00)
-Review 3: Actual = Positive, Predicted = Positive (Confidence: 0.74)
-Review 4: Actual = Negative, Predicted = Positive (Confidence: 0.83)
-Review 5: Actual = Positive, Predicted = Positive (Confidence: 0.97)
 """
 
 import os
@@ -137,4 +124,19 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Training Samples: 25000, Testing Samples: 25000
+Vocabulary Size: 10000
+Test Loss: 0.3101
+Test Accuracy: 87.91%
+
+Sample Predictions:
+Review 1: Actual = Negative, Predicted = Negative (Confidence: 0.16)
+Review 2: Actual = Positive, Predicted = Positive (Confidence: 1.00)
+Review 3: Actual = Positive, Predicted = Positive (Confidence: 0.74)
+Review 4: Actual = Negative, Predicted = Positive (Confidence: 0.83)
+Review 5: Actual = Positive, Predicted = Positive (Confidence: 0.97)
+"""
 

@@ -12,19 +12,6 @@
  *   macOS (Clang++):
  *     clang++ -std=c++17 -O2 08_parallel_database_query_optimization.cpp -o db_opt
  *     ./db_opt
- *
- * Sample Output:
- * Records Processed: 500000 orders
- * Sequential Query Time: 5.53 ms
- * Parallel Query Time: 2.15 ms
- * Speedup Factor: 2.57x
- *
- * Query Aggregation Results (by Region):
- * Region 1 -> Count: 17398, Total Sales: $17458619, Avg: $1003
- * Region 2 -> Count: 17107, Total Sales: $17066769, Avg: $997
- * Region 3 -> Count: 17006, Total Sales: $16988632, Avg: $998
- * Region 4 -> Count: 17407, Total Sales: $17412472, Avg: $1000
- * Region 5 -> Count: 17246, Total Sales: $17294785, Avg: $1002
  */
 
 #include <iostream>
@@ -165,3 +152,18 @@ int main() {
 
     return 0;
 }
+
+/*
+Sample Output:
+Records Processed: 500000 orders
+Sequential Query Time: 5.28 ms
+Parallel Query Time:   4.91 ms
+Speedup Factor:        1.08x
+
+Query Aggregation Results (by Region):
+Region 1 -> Count: 17398, Total Sales: $17458619, Avg: $1003
+Region 2 -> Count: 17107, Total Sales: $17066769, Avg: $997
+Region 3 -> Count: 17006, Total Sales: $16988632, Avg: $998
+Region 4 -> Count: 17407, Total Sales: $17412472, Avg: $1000
+Region 5 -> Count: 17246, Total Sales: $17294785, Avg: $1002
+*/

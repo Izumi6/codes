@@ -9,19 +9,6 @@ and prediction system using RNN.
 Dataset:
 - Google_Stock_Price_Train.csv (2,299 daily stock records, 2008-2016)
 - Google_Stock_Price_Test.csv (220 daily stock records, 2017)
-
-Sample Output:
-Train Records: 2299, Test Records: 220
-Input Sequence Shape: (2239, 60, 1)
-Root Mean Squared Error (RMSE): 15.08
-Mean Absolute Error (MAE): 11.28
-
-Sample Predictions (Actual vs Predicted Google Stock Price):
-3/15/2017 -> Actual: 867.94, Predicted: 868.52, Difference: 0.58
-3/16/2017 -> Actual: 870.53, Predicted: 868.77, Difference: 1.76
-3/17/2017 -> Actual: 873.68, Predicted: 873.77, Difference: 0.09
-3/20/2017 -> Actual: 869.48, Predicted: 877.98, Difference: 8.50
-3/21/2017 -> Actual: 870.06, Predicted: 876.01, Difference: 5.95
 """
 
 import os
@@ -158,4 +145,19 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+"""
+Sample Output:
+Train Records: 2299, Test Records: 220
+Input Sequence Shape: (2239, 60, 1)
+Root Mean Squared Error (RMSE): 15.08
+Mean Absolute Error (MAE): 11.28
+
+Sample Predictions (Actual vs Predicted Google Stock Price):
+3/15/2017 -> Actual: 867.94, Predicted: 868.52, Difference: 0.58
+3/16/2017 -> Actual: 870.53, Predicted: 868.77, Difference: 1.76
+3/17/2017 -> Actual: 873.68, Predicted: 873.77, Difference: 0.09
+3/20/2017 -> Actual: 869.48, Predicted: 877.98, Difference: 8.50
+3/21/2017 -> Actual: 870.06, Predicted: 876.01, Difference: 5.95
+"""
 

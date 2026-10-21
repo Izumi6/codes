@@ -13,8 +13,14 @@
 | **4.1** | [`04_01_cuda_vector_addition.cu`](04_01_cuda_vector_addition.cu) | CUDA program for addition of two large vectors |
 | **4.2** | [`04_02_cuda_matrix_multiplication.cu`](04_02_cuda_matrix_multiplication.cu) | CUDA program for matrix multiplication |
 | **5** | [`05_hpc_ai_ml_domain.cpp`](05_hpc_ai_ml_domain.cpp) | HPC application for AI/ML (Parallel Neural Network Layer Forward Pass) |
+| **6** | [`Mini Project/06_parallel_quicksort_mpi.cpp`](Mini%20Project/06_parallel_quicksort_mpi.cpp) | Evaluate performance enhancement of parallel Quicksort Algorithm using MPI |
+| **7** | [`Mini Project/07_huffman_encoding_gpu.cu`](Mini%20Project/07_huffman_encoding_gpu.cu) | Implement Huffman Encoding on GPU |
+| **8** | [`Mini Project/08_parallel_database_query_optimization.cpp`](Mini%20Project/08_parallel_database_query_optimization.cpp) | Implement Parallelization of Database Query optimization |
+| **9** | [`Mini Project/09_non_serial_polyadic_dp_gpu.cu`](Mini%20Project/09_non_serial_polyadic_dp_gpu.cu) | Implement Non-Serial Polyadic Dynamic Programming with GPU Parallelization |
 
 ---
+
+See [Mini Project/README.md](Mini%20Project/README.md) for detailed documentation and viva questions on HPC mini projects.
 
 ## 💻 How to Compile and Run (Windows Lab PC)
 

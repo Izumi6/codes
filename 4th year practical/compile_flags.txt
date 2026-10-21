@@ -1,3 +1,4 @@
--I/opt/homebrew/opt/libomp/include
--Xpreprocessor
--fopenmp
+-std=c++17
+-Wall
+-Wno-unused-variable
+-Wno-unused-parameter

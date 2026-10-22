@@ -8,6 +8,16 @@ This repository contains fully tested, standardized, and clean implementations o
 
 ```
 LP 3/
+├── Blockchain/
+│   ├── 01_02_metamask_wallet_setup.py
+│   ├── 03_bank_account_smart_contract.sol
+│   ├── 04_student_data_smart_contract.sol
+│   ├── 05_blockchain_survey_report.py
+│   └── Mini Project/
+│       ├── 01_evoting_dapp.sol
+│       ├── 02_transparent_charity_dapp.sol
+│       └── 03_health_medical_records.sol
+│
 ├── Machine Learning/
 │   ├── 01_Uber_Fare_Prediction/
 │   │   ├── 01_uber_fare_prediction.ipynb
@@ -27,8 +37,15 @@ LP 3/
 │   │   ├── 06_kmeans_clustering_sales.ipynb
 │   │   └── sales_data_sample.csv
 │   └── Mini Project/
+│       ├── 01_titanic_survival_prediction.py
 │       ├── 01_titanic_survival_prediction.ipynb
-│       └── titanic.csv
+│       ├── titanic.csv
+│       ├── 02_indian_stock_market_prediction.py
+│       ├── 02_indian_stock_market_prediction.ipynb
+│       ├── indian_stock_market_2000_2020.csv
+│       ├── 03_signature_identification.py
+│       ├── 03_signature_identification.ipynb
+│       └── student_signatures_dataset.csv
 │
 ├── Design and Analysis of Algorithms/
 │   ├── 01_fibonacci_step_count.py
@@ -42,14 +59,6 @@ LP 3/
 │       ├── 02_merge_sort_threaded.py
 │       └── 03_string_matching_naive_rabin_karp.py
 │
-├── Blockchain/
-│   ├── 01_02_metamask_wallet_setup.py
-│   ├── 03_bank_account_smart_contract.sol
-│   ├── 04_student_data_smart_contract.sol
-│   ├── 05_blockchain_survey_report.py
-│   └── Mini Project/
-│       └── 01_evoting_dapp.sol
-│
 ├── requirements.txt
 └── README.md
 ```
@@ -58,103 +67,40 @@ LP 3/
 
 ## 🛠️ Installation & Setup
 
-1. **Clone the repository:**
-   ```bash
-   git clone <your-github-repo-url>
-   cd "4th year practical/LP 3"
-   ```
-
-2. **Install required Python packages:**
+1. **Install required Python packages:**
    ```bash
    pip install -r requirements.txt
    ```
 
+2. **Windows Lab PC Compatibility:**
+   All Python codes use standard libraries (`pandas`, `numpy`, `scikit-learn`) and require no extra compiler setup.
+
 ---
 
-## 🤖 1. Machine Learning (ML) Practicals
+## 🔗 1. Blockchain Technology (BT) Mini Projects
 
-All Machine Learning assignments are provided as clean, standalone **Jupyter Notebooks (`.ipynb`)**. They run seamlessly in **VS Code** (with the Jupyter extension), **JupyterLab / Notebook**, and **Google Colab**.
-
-| Assignment | Title | Algorithm / Technique | Dataset |
+| File | Mini Project Title | Description | Testing Environment |
 | :--- | :--- | :--- | :--- |
-| **01** | Uber Fare Prediction | Linear Regression vs Random Forest, Haversine Distance | `uber.csv` |
-| **02** | Email Spam Classification | K-Nearest Neighbors (KNN) & Support Vector Machine (SVM) | `emails.csv` |
-| **03** | Bank Customer Churn | Artificial Neural Network (ANN) / Deep Learning | `Churn_Modelling.csv` |
-| **04** | Gradient Descent | Gradient Descent Optimization from Scratch on $y=(x+3)^2$ | None (Synthetic) |
-| **05** | Diabetes Prediction | KNN with Hyperparameter Tuning (K vs Error Rate) | `diabetes.csv` |
-| **06** | Sales Customer Segmentation | K-Means Clustering & Elbow Method (WCSS, Silhouette) | `sales_data_sample.csv` |
-| **Mini Project** | Titanic Survival Prediction | Random Forest Classification with Feature Importance | `titanic.csv` |
-
-### How to Run:
-- **In VS Code**: Simply click on any `.ipynb` file in the sidebar and click **"Run All"** (or use `Shift + Enter` to step through cells).
-- **In Jupyter Notebook**:
-  ```bash
-  jupyter notebook "LP 3/Machine Learning/01_Uber_Fare_Prediction/01_uber_fare_prediction.ipynb"
-  ```
+| `01_evoting_dapp.sol` | **E-Voting System dApp** | Decentralized voting with admin voter verification, tamper-proof ballot, one vote per address. | Remix IDE / Remix VM |
+| `02_transparent_charity_dapp.sol` | **Transparent & Genuine Charity** | Milestone-based charity funding with donor voting on fund release to beneficiaries/vendors. | Remix IDE / Remix VM |
+| `03_health_medical_records.sol` | **Health & Medical Records EHR** | Patient-controlled electronic health records with doctor authorization, revocation, and IPFS hash tracking. | Remix IDE / Remix VM |
 
 ---
 
-## ⚡ 2. Design and Analysis of Algorithms (DAA) Practicals
+## 🤖 2. Machine Learning (ML) Mini Projects
 
-All DAA practicals are implemented in **pure, standard Python** without any third-party dependencies.
-
-> 💡 **User-Friendly Demo Mode**: Each script accepts interactive input from the keyboard, but also supports pressing **Enter** to instantly run standard textbook sample inputs for quick lab viva and testing without crashing!
-
-| Assignment | Title | Approach / Strategy | Time Complexity | Space Complexity |
-| :--- | :--- | :--- | :--- | :--- |
-| **01** | Fibonacci Step Count | Recursive vs Iterative vs Memoized DP | $O(2^n)$ vs $O(n)$ | $O(n)$ vs $O(1)$ |
-| **02** | Job Sequencing | Greedy Method (sorted by profit) | $O(n^2)$ | $O(n)$ |
-| **03** | Fractional Knapsack | Greedy Method (sorted by value/weight) | $O(n \log n)$ | $O(n)$ |
-| **04** | 0/1 Knapsack | Dynamic Programming & Branch and Bound | $O(n \cdot W)$ | $O(n \cdot W)$ |
-| **05** | Binomial Coefficients | Pascal's Triangle DP Matrix | $O(n \cdot k)$ | $O(n \cdot k)$ |
-| **06** | 8-Queens Problem | Backtracking (with 1st Queen pre-placed) | $O(n!)$ | $O(n)$ |
-| **Mini 01** | Multithreaded Matrix Multiplication | Multithreading benchmark vs Single-threaded | Benchmark | Benchmark |
-| **Mini 02** | Multithreaded Merge Sort | Parallel divide-and-conquer using Threads | $O(n \log n)$ | $O(n)$ |
-| **Mini 03** | String Pattern Matching | Naive String Search vs Rabin-Karp Rolling Hash | $O(n \cdot m)$ vs $O(n+m)$ | $O(1)$ |
-
-### How to Run:
-```bash
-python3 "Design and Analysis of Algorithms/01_fibonacci_step_count.py"
-```
-
----
-
-## ⛓️ 3. Blockchain Technology Practicals
-
-All Solidity contracts have been validated with the Solidity compiler `0.8.x` and are ready for deployment in **Remix IDE** or **MetaMask Testnets**.
-
-| Assignment | Title | Technology / Implementation | Deployment Target |
+| File | Mini Project Title | Algorithm / Techniques | Dataset |
 | :--- | :--- | :--- | :--- |
-| **01 & 02** | MetaMask Setup & Ether Spending | Interactive Guide & Gas Cost Calculator | Browser MetaMask Extension |
-| **03** | Bank Account Smart Contract | Solidity (`deposit`, `withdraw`, `getBalance`, Events) | Remix IDE / Sepolia Testnet |
-| **04** | Student Data Smart Contract | Solidity (Struct, Dynamic Array, Fallback function) | Remix IDE / Sepolia Testnet |
-| **05** | Blockchain Survey Report | Multi-domain comparative survey (DeFi, Healthcare, etc.) | Terminal / Python Report |
-| **Mini Project** | Decentralized E-Voting DApp | Decentralized Voting, Candidate Registry, Ballot counting | Remix IDE / Sepolia Testnet |
-
-### How to Test Smart Contracts in Remix IDE:
-1. Open [Remix Ethereum IDE](https://remix.ethereum.org/).
-2. Create a new file (e.g. `BankAccount.sol`) and paste the contract code.
-3. In **Solidity Compiler** tab, select compiler version `0.8.20` or higher and click **Compile**.
-4. In **Deploy & Run Transactions** tab, select environment:
-   - `Remix VM` (for instant local simulated blockchain testing)
-   - `Injected Provider - MetaMask` (for Sepolia testnet testing)
-5. Click **Deploy** and interact with the contract methods directly in the Remix UI!
+| `01_titanic_survival_prediction.py` | **Titanic Shipwreck Survival Prediction** | Random Forest Classifier, Feature Preprocessing | `titanic.csv` |
+| `02_indian_stock_market_prediction.py` | **Indian Stock Market Return & Trend Prediction (2000-2020)** | Random Forest Classifier (Ups & Downs) & Regressor (Returns) | `indian_stock_market_2000_2020.csv` |
+| `03_signature_identification.py` | **Student Handwritten Signature Identification & Verification** | Biometric geometric features, Multi-class Identification & Genuine/Forgery Verification | `student_signatures_dataset.csv` |
 
 ---
 
-## 📦 GitHub Upload Guidelines
+## ⚡ 3. Design and Analysis of Algorithms (DAA) Mini Projects
 
-A `.gitignore` file is included in this repository to prevent uploading:
-- `archive (2).zip` (273 MB) — Exceeds GitHub's 100 MB hard limit.
-- `Machine Learning/Data/` (1.4 GB) — Unused Indian stock market CSV archives.
-- System cache and temporary files (`.DS_Store`, `__pycache__`, `.ipynb_checkpoints`).
-
-To push this repository to GitHub:
-```bash
-git init
-git add .
-git commit -m "Initial commit of SPPU 4th Year LP-3 Practicals"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
+| File | Mini Project Title | Algorithm / Techniques | Complexity / Features |
+| :--- | :--- | :--- | :--- |
+| `01_matrix_multiplication_threaded.py` | **Multithreaded Matrix Multiplication** | Single-threaded vs One thread per row vs One thread per cell | Time comparison across $50\times 50$ to $150\times 150$ matrices |
+| `02_merge_sort_threaded.py` | **Multithreaded Merge Sort** | Sequential vs Multithreaded Merge Sort, Best & Worst case analysis | Divide & Conquer with Python `threading` |
+| `03_string_matching_naive_rabin_karp.py` | **Naive vs Rabin-Karp String Matching** | Rolling Hash vs Brute-force character comparison | Detailed comparison counts & runtimes |

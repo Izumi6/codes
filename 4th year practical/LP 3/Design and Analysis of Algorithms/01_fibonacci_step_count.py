@@ -78,114 +78,93 @@ def fibonacci_memoized(n, memo, step_counter):
     return memo[n]
 
 
-def display_separator(char='─', width=70):
-    print(char * width)
-
-
 def main():
-    print("=" * 70)
-    print("   FIBONACCI NUMBER CALCULATION WITH STEP COUNT ANALYSIS")
-    print("=" * 70)
-
-    user_input = input("\n  Enter the value of n (recommended ≤ 30 for recursive) [Default: 10]: ").strip()
-    n = int(user_input) if user_input else 10
-    if not user_input:
-        print(f"  [Using default: n = {n}]")
+    print("--- Fibonacci Number Calculation (Recursive vs Non-Recursive) ---")
+    n = int(input("Enter n: "))
 
     if n < 0:
-        print("  [Error] n must be a non-negative integer.")
+        print("Error: n must be a non-negative integer.")
         return
 
-    # ── Method 1: Recursive ──────────────────────────────────────────────
-    print(f"\n{'─' * 70}")
-    print("  METHOD 1: Naive Recursive Approach")
-    print(f"{'─' * 70}")
+    print(f"\nCalculating Fibonacci for n = {n}...\n")
 
+    # 1. Recursive
     if n <= 30:
         step_counter_rec = {'count': 0}
         start = time.perf_counter()
         result_rec = fibonacci_recursive(n, step_counter_rec)
         elapsed_rec = time.perf_counter() - start
 
-        print(f"  Fibonacci({n})  = {result_rec}")
-        print(f"  Step Count     = {step_counter_rec['count']}")
-        print(f"  Time Elapsed   = {elapsed_rec:.6f} seconds")
+        print("1. Naive Recursive Approach:")
+        print(f"   Fibonacci({n}) = {result_rec}")
+        print(f"   Step Count     = {step_counter_rec['count']}")
+        print(f"   Time Taken     = {elapsed_rec:.6f} seconds\n")
     else:
-        print("  [Skipped] n > 30 — recursive approach is too slow.")
+        print("1. Naive Recursive Approach: Skipped (n > 30 is too slow)\n")
 
-    # ── Method 2: Iterative ──────────────────────────────────────────────
-    print(f"\n{'─' * 70}")
-    print("  METHOD 2: Iterative (Bottom-Up) Approach")
-    print(f"{'─' * 70}")
-
+    # 2. Iterative
     start = time.perf_counter()
     result_iter, steps_iter = fibonacci_iterative(n)
     elapsed_iter = time.perf_counter() - start
 
-    print(f"  Fibonacci({n})  = {result_iter}")
-    print(f"  Step Count     = {steps_iter}")
-    print(f"  Time Elapsed   = {elapsed_iter:.6f} seconds")
+    print("2. Iterative (Non-Recursive) Approach:")
+    print(f"   Fibonacci({n}) = {result_iter}")
+    print(f"   Step Count     = {steps_iter}")
+    print(f"   Time Taken     = {elapsed_iter:.6f} seconds\n")
 
-    # ── Method 3: Memoized ───────────────────────────────────────────────
-    print(f"\n{'─' * 70}")
-    print("  METHOD 3: Memoized (Top-Down DP) Approach")
-    print(f"{'─' * 70}")
-
+    # 3. Memoized
     step_counter_memo = {'count': 0}
     memo = {}
     start = time.perf_counter()
     result_memo = fibonacci_memoized(n, memo, step_counter_memo)
     elapsed_memo = time.perf_counter() - start
 
-    print(f"  Fibonacci({n})  = {result_memo}")
-    print(f"  Step Count     = {step_counter_memo['count']}")
-    print(f"  Time Elapsed   = {elapsed_memo:.6f} seconds")
+    print("3. Dynamic Programming (Memoized) Approach:")
+    print(f"   Fibonacci({n}) = {result_memo}")
+    print(f"   Step Count     = {step_counter_memo['count']}")
+    print(f"   Time Taken     = {elapsed_memo:.6f} seconds\n")
 
-    # ── Comparison Table ─────────────────────────────────────────────────
-    print(f"\n{'═' * 70}")
-    print("  STEP COUNT COMPARISON")
-    print(f"{'═' * 70}")
-    print(f"  {'Method':<25} {'Steps':>12} {'Time (sec)':>15}")
-    print(f"  {'─' * 25} {'─' * 12} {'─' * 15}")
-
+    # Summary
+    print("Summary:")
+    print("Method           Steps        Time (s)")
+    print("---------------------------------------")
     if n <= 30:
-        print(f"  {'Recursive':<25} {step_counter_rec['count']:>12,} {elapsed_rec:>15.6f}")
-    else:
-        print(f"  {'Recursive':<25} {'N/A':>12} {'N/A':>15}")
-
-    print(f"  {'Iterative':<25} {steps_iter:>12,} {elapsed_iter:>15.6f}")
-    print(f"  {'Memoized (DP)':<25} {step_counter_memo['count']:>12,} {elapsed_memo:>15.6f}")
-    print(f"{'═' * 70}\n")
+        print(f"Recursive        {step_counter_rec['count']:<12} {elapsed_rec:.6f}")
+    print(f"Iterative        {steps_iter:<12} {elapsed_iter:.6f}")
+    print(f"Memoized (DP)    {step_counter_memo['count']:<12} {elapsed_memo:.6f}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- Fibonacci Number Calculation (Recursive vs Non-Recursive) ---
+Enter n: 10
 
-  Enter the value of n (recommended ≤ 30 for recursive): 10
+Calculating Fibonacci for n = 10...
 
-  METHOD 1: Naive Recursive Approach
-    Fibonacci(10)  = 55
-    Step Count     = 177
-    Time Elapsed   = 0.000021 seconds
+1. Naive Recursive Approach:
+   Fibonacci(10) = 55
+   Step Count     = 177
+   Time Taken     = 0.000021 seconds
 
-  METHOD 2: Iterative (Bottom-Up) Approach
-    Fibonacci(10)  = 55
-    Step Count     = 9
-    Time Elapsed   = 0.000001 seconds
+2. Iterative (Non-Recursive) Approach:
+   Fibonacci(10) = 55
+   Step Count     = 9
+   Time Taken     = 0.000001 seconds
 
-  METHOD 3: Memoized (Top-Down DP) Approach
-    Fibonacci(10)  = 55
-    Step Count     = 19
-    Time Elapsed   = 0.000004 seconds
+3. Dynamic Programming (Memoized) Approach:
+   Fibonacci(10) = 55
+   Step Count     = 19
+   Time Taken     = 0.000004 seconds
 
-  STEP COUNT COMPARISON
-    Method                          Steps      Time (sec)
-    Recursive                         177        0.000021
-    Iterative                           9        0.000001
-    Memoized (DP)                      19        0.000004
-
-========================================================================
+Summary:
+Method           Steps        Time (s)
+---------------------------------------
+Recursive        177          0.000021
+Iterative        9            0.000001
+Memoized (DP)    19           0.000004
+----------------------------------------------
 """

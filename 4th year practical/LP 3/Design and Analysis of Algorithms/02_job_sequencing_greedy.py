@@ -74,86 +74,61 @@ def job_sequencing(jobs):
     return scheduled_jobs, total_profit
 
 
-def print_job_table(jobs, title="INPUT JOBS"):
-    """Display a formatted table of jobs."""
-    print(f"\n  {title}")
-    print(f"  {'─' * 45}")
-    print(f"  {'Job ID':<12} {'Deadline':>10} {'Profit':>12}")
-    print(f"  {'─' * 45}")
-    for job in jobs:
-        print(f"  {job.job_id:<12} {job.deadline:>10} {job.profit:>12}")
-    print(f"  {'─' * 45}")
-
-
 def main():
-    print("=" * 60)
-    print("   JOB SEQUENCING WITH DEADLINES — GREEDY METHOD")
-    print("=" * 60)
+    print("--- Job Sequencing with Deadlines (Greedy Strategy) ---")
+    n = int(input("Enter number of jobs: "))
+    jobs = []
+    for i in range(1, n + 1):
+        deadline = int(input(f"Job {i} Deadline: "))
+        profit = int(input(f"Job {i} Profit  : "))
+        jobs.append(Job(job_id=f"J{i}", deadline=deadline, profit=profit))
 
-    user_input = input("\n  Enter the number of jobs [Press Enter for default sample (5 jobs)]: ").strip()
-    if not user_input:
-        print("  [Using default textbook sample: 5 jobs]")
-        jobs = [
-            Job(job_id="J1", deadline=2, profit=100),
-            Job(job_id="J2", deadline=1, profit=19),
-            Job(job_id="J3", deadline=2, profit=27),
-            Job(job_id="J4", deadline=1, profit=25),
-            Job(job_id="J5", deadline=3, profit=15)
-        ]
-    else:
-        n = int(user_input)
-        jobs = []
-        print("\n  Enter job details (deadline and profit for each job):")
-        print(f"  {'─' * 45}")
+    print("\nInput Jobs:")
+    for job in jobs:
+        print(f"  {job.job_id}: Deadline = {job.deadline}, Profit = {job.profit}")
 
-        for i in range(1, n + 1):
-            deadline = int(input(f"    Job J{i} — Deadline : "))
-            profit = int(input(f"    Job J{i} — Profit   : "))
-            jobs.append(Job(job_id=f"J{i}", deadline=deadline, profit=profit))
-            print()
-
-    # Display the input jobs
-    print_job_table(jobs)
-
-    # Execute greedy job sequencing
     scheduled, total_profit = job_sequencing(jobs)
 
-    # ── Display Results ──────────────────────────────────────────────────
-    print(f"\n{'═' * 60}")
-    print("  OPTIMAL JOB SCHEDULE (Greedy by Profit)")
-    print(f"{'═' * 60}")
-    print(f"  {'Time Slot':<12} {'Job ID':<12} {'Profit':>12}")
-    print(f"  {'─' * 45}")
-
+    print("\nOptimal Scheduled Jobs:")
     for slot_num, job in scheduled:
-        print(f"  {slot_num:<12} {job.job_id:<12} {job.profit:>12}")
+        print(f"  Slot {slot_num}: {job.job_id} (Profit = {job.profit})")
 
-    print(f"  {'─' * 45}")
-    print(f"  {'TOTAL PROFIT':<24} {total_profit:>12}")
-    print(f"  {'Jobs Scheduled':<24} {len(scheduled):>12} / {len(jobs)}")
-    print(f"{'═' * 60}\n")
+    print(f"\nTotal Profit: {total_profit}")
+    print(f"Jobs Scheduled: {len(scheduled)} out of {len(jobs)}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- Job Sequencing with Deadlines (Greedy Strategy) ---
+Enter number of jobs: 5
+Job 1 Deadline: 2
+Job 1 Profit  : 100
+Job 2 Deadline: 1
+Job 2 Profit  : 19
+Job 3 Deadline: 2
+Job 3 Profit  : 27
+Job 4 Deadline: 1
+Job 4 Profit  : 25
+Job 5 Deadline: 3
+Job 5 Profit  : 15
 
-  Enter the number of jobs: 4
-    Job J1 — Deadline: 2, Profit: 100
-    Job J2 — Deadline: 1, Profit: 19
-    Job J3 — Deadline: 3, Profit: 27
-    Job J4 — Deadline: 4, Profit: 25
+Input Jobs:
+  J1: Deadline = 2, Profit = 100
+  J2: Deadline = 1, Profit = 19
+  J3: Deadline = 2, Profit = 27
+  J4: Deadline = 1, Profit = 25
+  J5: Deadline = 3, Profit = 15
 
-  OPTIMAL JOB SCHEDULE (Greedy by Profit)
-    Time Slot    Job ID         Profit
-    1            J2                 19
-    2            J1                100
-    3            J3                 27
-    4            J4                 25
-    TOTAL PROFIT                  171
-    Jobs Scheduled                  4 / 4
+Optimal Scheduled Jobs:
+  Slot 1: J3 (Profit = 27)
+  Slot 2: J1 (Profit = 100)
+  Slot 3: J5 (Profit = 15)
 
-========================================================================
+Total Profit: 142
+Jobs Scheduled: 3 out of 5
+----------------------------------------------
 """

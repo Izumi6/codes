@@ -116,95 +116,68 @@ def time_sort(sort_func, arr, label):
 
 
 def main():
-    print("=" * 70)
-    print("  MERGE SORT — STANDARD vs MULTITHREADED")
-    print("=" * 70)
+    print("--- Merge Sort: Standard vs Multithreaded ---")
 
     # Small demo
-    print(f"\n{'─' * 70}")
-    print("  DEMO: Sorting a small array")
-    print(f"{'─' * 70}")
-
     demo = [38, 27, 43, 3, 9, 82, 10]
-    print(f"\n  Original : {demo}")
+    print(f"\nOriginal array : {demo}")
     demo_sorted = copy.deepcopy(demo)
     merge_sort(demo_sorted, 0, len(demo_sorted) - 1)
-    print(f"  Sorted   : {demo_sorted}")
+    print(f"Sorted array   : {demo_sorted}")
 
     # Performance comparison
-    sizes = [10000, 50000, 100000]
+    sizes = [10000, 50000]
 
-    print(f"\n{'═' * 70}")
-    print("  PERFORMANCE COMPARISON")
-    print(f"{'═' * 70}")
-
+    print("\nPerformance Comparison (Time in seconds):")
     for n in sizes:
-        print(f"\n  Array Size: {n:,}")
-        print(f"  {'─' * 60}")
-        print(f"  {'Case':<18} {'Standard':<18} {'Multithreaded':<18}")
-        print(f"  {'─' * 60}")
+        print(f"\nArray Size: {n}")
+        print("Case               Standard         Multithreaded")
+        print("--------------------------------------------------")
 
         # Best Case: Already sorted
         best = list(range(n))
         t_std = time_sort(merge_sort, best, "Standard-Best")
         t_mt = time_sort(threaded_merge_sort, best, "Threaded-Best")
-        print(f"  {'Best (sorted)':<18} {t_std:<18.4f} {t_mt:<18.4f}")
+        print(f"{'Best (sorted)':<18} {t_std:<16.4f} {t_mt:<16.4f}")
 
         # Worst Case: Reverse sorted
         worst = list(range(n, 0, -1))
         t_std = time_sort(merge_sort, worst, "Standard-Worst")
         t_mt = time_sort(threaded_merge_sort, worst, "Threaded-Worst")
-        print(f"  {'Worst (reverse)':<18} {t_std:<18.4f} {t_mt:<18.4f}")
+        print(f"{'Worst (reverse)':<18} {t_std:<16.4f} {t_mt:<16.4f}")
 
         # Average Case: Random
         avg = [random.randint(1, n) for _ in range(n)]
         t_std = time_sort(merge_sort, avg, "Standard-Avg")
         t_mt = time_sort(threaded_merge_sort, avg, "Threaded-Avg")
-        print(f"  {'Average (random)':<18} {t_std:<18.4f} {t_mt:<18.4f}")
-
-    print(f"\n{'─' * 70}")
-    print("  ANALYSIS")
-    print(f"{'─' * 70}")
-    print("""
-    1. Merge Sort has O(n log n) time complexity in ALL cases.
-    2. Best/Worst/Average cases have same asymptotic complexity.
-    3. Best case (sorted) may be slightly faster due to cache locality.
-    4. Multithreaded version splits work across threads at top levels.
-    5. Due to Python's GIL, multithreading may not show speedup.
-       (In C/Java, multithreaded merge sort shows clear improvement.)
-    6. Thread creation overhead can make multithreaded slower for small arrays.
-    7. Space Complexity: O(n) for both versions (merge requires extra space).
-    """)
-    print(f"{'═' * 70}\n")
+        print(f"{'Average (random)':<18} {t_std:<16.4f} {t_mt:<16.4f}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- Merge Sort: Standard vs Multithreaded ---
 
-  DEMO: Sorting a small array
-  Original : [38, 27, 43, 3, 9, 82, 10]
-  Sorted   : [3, 9, 10, 27, 38, 43, 82]
+Original array : [38, 27, 43, 3, 9, 82, 10]
+Sorted array   : [3, 9, 10, 27, 38, 43, 82]
 
-  PERFORMANCE COMPARISON
+Performance Comparison (Time in seconds):
 
-  Array Size: 10,000
-  Case               Standard           Multithreaded
-  Best (sorted)      0.0312             0.0287
-  Worst (reverse)    0.0341             0.0298
-  Average (random)   0.0356             0.0312
+Array Size: 10000
+Case               Standard         Multithreaded
+--------------------------------------------------
+Best (sorted)      0.0195           0.0182          
+Worst (reverse)    0.0210           0.0191          
+Average (random)   0.0234           0.0215          
 
-  Array Size: 50,000
-  Case               Standard           Multithreaded
-  Best (sorted)      0.1845             0.1523
-  Worst (reverse)    0.1912             0.1601
-  Average (random)   0.2034             0.1698
-
-  ANALYSIS
-    Merge Sort has O(n log n) in ALL cases.
-    Multithreaded version splits work across threads at top levels.
-
-========================================================================
+Array Size: 50000
+Case               Standard         Multithreaded
+--------------------------------------------------
+Best (sorted)      0.1120           0.1045          
+Worst (reverse)    0.1190           0.1082          
+Average (random)   0.1345           0.1250          
+----------------------------------------------
 """

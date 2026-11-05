@@ -191,97 +191,67 @@ def knapsack_branch_and_bound(weights, values, capacity, n):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def main():
-    print("=" * 65)
-    print("   0-1 KNAPSACK — DYNAMIC PROGRAMMING & BRANCH AND BOUND")
-    print("=" * 65)
+    print("--- 0-1 Knapsack Problem (DP and Branch & Bound) ---")
+    n = int(input("Enter number of items: "))
+    capacity = int(input("Enter knapsack capacity: "))
+    weights = []
+    values = []
+    for i in range(1, n + 1):
+        weights.append(int(input(f"Item {i} Weight: ")))
+        values.append(int(input(f"Item {i} Value : ")))
 
-    user_input = input("\n  Enter the number of items [Press Enter for default sample (3 items)]: ").strip()
-    if not user_input:
-        print("  [Using default textbook sample: Capacity = 50, 3 items]")
-        capacity = 50
-        weights = [10, 20, 30]
-        values = [60, 100, 120]
-        n = 3
-    else:
-        n = int(user_input)
-        capacity = int(input("  Enter the knapsack capacity: "))
-        weights = []
-        values = []
-        print("\n  Enter item details:")
-        print(f"  {'─' * 40}")
-
-        for i in range(1, n + 1):
-            w = int(input(f"    Item {i} — Weight : "))
-            v = int(input(f"    Item {i} — Value  : "))
-            weights.append(w)
-            values.append(v)
-            print()
-
-    # ── Display Input ────────────────────────────────────────────────────
-    print(f"\n  INPUT")
-    print(f"  {'─' * 45}")
-    print(f"  {'Item':<10} {'Weight':>10} {'Value':>10}")
-    print(f"  {'─' * 45}")
+    print(f"\nKnapsack Capacity: {capacity}")
+    print("Input Items:")
     for i in range(n):
-        print(f"  Item {i + 1:<5} {weights[i]:>10} {values[i]:>10}")
-    print(f"  {'─' * 45}")
-    print(f"  Knapsack Capacity: {capacity}")
+        print(f"  Item {i + 1}: Weight = {weights[i]}, Value = {values[i]}")
 
-    # ── Solve with Dynamic Programming ───────────────────────────────────
-    dp_value, dp_items = knapsack_dp(weights, values, capacity, n)
+    # Dynamic Programming
+    dp_val, dp_items = knapsack_dp(weights, values, capacity, n)
+    dp_weight = sum(weights[i - 1] for i in dp_items)
+    print("\n1. Dynamic Programming:")
+    print(f"   Maximum Value : {dp_val}")
+    print(f"   Selected Items: {', '.join(f'Item {i}' for i in dp_items)}")
+    print(f"   Total Weight  : {dp_weight}/{capacity}")
 
-    print(f"\n{'═' * 65}")
-    print("  RESULT — Dynamic Programming (Bottom-Up)")
-    print(f"{'═' * 65}")
-    print(f"  Maximum Value    : {dp_value}")
-    print(f"  Items Selected   : {', '.join(f'Item {i}' for i in dp_items)}")
-    total_w = sum(weights[i - 1] for i in dp_items)
-    print(f"  Total Weight Used: {total_w} / {capacity}")
-
-    # ── Solve with Branch and Bound ──────────────────────────────────────
-    bb_value, bb_items = knapsack_branch_and_bound(weights, values, capacity, n)
-
-    print(f"\n{'═' * 65}")
-    print("  RESULT — Branch and Bound (Best-First Search)")
-    print(f"{'═' * 65}")
-    print(f"  Maximum Value    : {bb_value}")
-    print(f"  Items Selected   : {', '.join(f'Item {i}' for i in bb_items)}")
-    total_w_bb = sum(weights[i - 1] for i in bb_items)
-    print(f"  Total Weight Used: {total_w_bb} / {capacity}")
-
-    # ── Verification ─────────────────────────────────────────────────────
-    print(f"\n{'─' * 65}")
-    if dp_value == bb_value:
-        print("  ✓ Both methods agree on the optimal value.")
-    else:
-        print("  ✗ Results differ — please verify input.")
-    print(f"{'═' * 65}\n")
+    # Branch and Bound
+    bb_val, bb_items = knapsack_branch_and_bound(weights, values, capacity, n)
+    bb_weight = sum(weights[i - 1] for i in bb_items)
+    print("\n2. Branch and Bound:")
+    print(f"   Maximum Value : {bb_val}")
+    print(f"   Selected Items: {', '.join(f'Item {i}' for i in bb_items)}")
+    print(f"   Total Weight  : {bb_weight}/{capacity}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- 0-1 Knapsack Problem (DP and Branch & Bound) ---
+Enter number of items: 3
+Enter knapsack capacity: 50
+Item 1 Weight: 10
+Item 1 Value : 60
+Item 2 Weight: 20
+Item 2 Value : 100
+Item 3 Weight: 30
+Item 3 Value : 120
 
-  Enter the number of items: 4
-  Enter the knapsack capacity: 7
-    Item 1 — Weight: 2, Value: 1
-    Item 2 — Weight: 3, Value: 4
-    Item 3 — Weight: 5, Value: 7
-    Item 4 — Weight: 1, Value: 5
+Knapsack Capacity: 50
+Input Items:
+  Item 1: Weight = 10, Value = 60
+  Item 2: Weight = 20, Value = 100
+  Item 3: Weight = 30, Value = 120
 
-  RESULT — Dynamic Programming (Bottom-Up)
-    Maximum Value    : 12
-    Items Selected   : Item 3, Item 4
-    Total Weight Used: 6 / 7
+1. Dynamic Programming:
+   Maximum Value : 220
+   Selected Items: Item 2, Item 3
+   Total Weight  : 50/50
 
-  RESULT — Branch and Bound (Best-First Search)
-    Maximum Value    : 12
-    Items Selected   : Item 3, Item 4
-    Total Weight Used: 6 / 7
-
-  ✓ Both methods agree on the optimal value.
-
-========================================================================
+2. Branch and Bound:
+   Maximum Value : 220
+   Selected Items: Item 2, Item 3
+   Total Weight  : 50/50
+----------------------------------------------
 """

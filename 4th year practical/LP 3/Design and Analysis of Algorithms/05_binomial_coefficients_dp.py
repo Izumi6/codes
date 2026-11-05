@@ -52,25 +52,26 @@ def display_pascals_triangle(table, n, k):
     """
     Display Pascal's Triangle up to row n (limited to column k).
     """
-    print(f"\n  PASCAL'S TRIANGLE (rows 0 to {n}, columns 0 to {k})")
-    print(f"  {'─' * (8 * (k + 1) + 10)}")
+    print(f"\nPascal's Triangle (rows 0 to {n}, columns 0 to {k}):")
+    sep = "-" * (8 * (k + 1) + 8)
+    print(sep)
 
     # Header row
     label = "n \\ k"
-    header = f"  {label:<6}"
+    header = f"{label:<6}"
     for j in range(k + 1):
         header += f"{j:>8}"
     print(header)
-    print(f"  {'─' * (8 * (k + 1) + 10)}")
+    print(sep)
 
     # Data rows
     for i in range(n + 1):
-        row_str = f"  {i:<6}"
+        row_str = f"{i:<6}"
         for j in range(min(i, k) + 1):
             row_str += f"{table[i][j]:>8}"
         print(row_str)
 
-    print(f"  {'─' * (8 * (k + 1) + 10)}")
+    print(sep)
 
 
 def verify_with_formula(n, k):
@@ -95,88 +96,56 @@ def verify_with_formula(n, k):
 
 
 def main():
-    print("=" * 65)
-    print("   BINOMIAL COEFFICIENTS — DYNAMIC PROGRAMMING")
-    print("=" * 65)
-
-    user_n = input("\n  Enter the value of n [Default: 5]: ").strip()
-    n = int(user_n) if user_n else 5
-    user_k = input(f"  Enter the value of k (k ≤ {n}) [Default: 2]: ").strip()
-    k = int(user_k) if user_k else 2
-    if not user_n and not user_k:
-        print(f"  [Using default textbook sample: n = {n}, k = {k}]")
+    print("--- Binomial Coefficients using Dynamic Programming ---")
+    n = int(input("Enter value of n: "))
+    k = int(input(f"Enter value of k (k <= {n}): "))
 
     if k > n:
-        print("\n  [Error] k cannot be greater than n.")
+        print("Error: k cannot be greater than n.")
         return
     if n < 0 or k < 0:
-        print("\n  [Error] n and k must be non-negative integers.")
+        print("Error: n and k must be non-negative integers.")
         return
 
-    # ── Generate the DP Table ────────────────────────────────────────────
+    # Generate the DP Table
     table = generate_binomial_table(n, k)
 
-    # ── Display Pascal's Triangle ────────────────────────────────────────
+    # Display Pascal's Triangle
     display_pascals_triangle(table, n, k)
 
-    # ── Display the Result ───────────────────────────────────────────────
+    # Display the Result
     result_dp = table[n][k]
     result_formula = verify_with_formula(n, k)
 
-    print(f"\n{'═' * 65}")
-    print(f"  RESULT")
-    print(f"{'═' * 65}")
-    print(f"  C({n}, {k}) using DP Table      = {result_dp}")
+    print(f"\nResult:")
+    print(f"  C({n}, {k}) using DP Table       = {result_dp}")
     print(f"  C({n}, {k}) using Direct Formula = {result_formula}")
-    print(f"{'─' * 65}")
-
-    if result_dp == result_formula:
-        print(f"  ✓ Both methods agree. C({n}, {k}) = {result_dp}")
-    else:
-        print(f"  ✗ Mismatch detected — please verify.")
-
-    print(f"{'═' * 65}")
-
-    # ── Additional: Display Some Useful Properties ───────────────────────
-    print(f"\n  PROPERTIES OF C({n}, {k}):")
-    print(f"  {'─' * 50}")
-    print(f"  • Symmetry  : C({n}, {k}) = C({n}, {n - k}) = {table[n][min(n - k, k)] if n - k <= k else result_dp}")
-    print(f"  • Row Sum   : Σ C({n}, j) for j=0..{n}  = 2^{n} = {2 ** n}")
-    if n >= 1:
-        print(f"  • Recurrence: C({n}, {k}) = C({n - 1}, {k - 1}) + C({n - 1}, {k})")
-        left = table[n - 1][k - 1] if k - 1 >= 0 else 0
-        right = table[n - 1][k] if k <= n - 1 else 0
-        print(f"                          = {left} + {right} = {left + right}")
-    print(f"{'═' * 65}\n")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- Binomial Coefficients using Dynamic Programming ---
+Enter value of n: 5
+Enter value of k (k <= 5): 2
 
-  Enter the value of n: 5
-  Enter the value of k (k ≤ n): 2
+Pascal's Triangle (rows 0 to 5, columns 0 to 2):
+--------------------------------
+n \ k        0       1       2
+--------------------------------
+0            1
+1            1       1
+2            1       2       1
+3            1       3       3
+4            1       4       6
+5            1       5      10
+--------------------------------
 
-  PASCAL'S TRIANGLE (rows 0 to 5, columns 0 to 2)
-    n \ k      0       1       2
-    0          1
-    1          1       1
-    2          1       2       1
-    3          1       3       3
-    4          1       4       6
-    5          1       5      10
-
-  RESULT
-    C(5, 2) using DP Table      = 10
-    C(5, 2) using Direct Formula = 10
-    ✓ Both methods agree. C(5, 2) = 10
-
-  PROPERTIES OF C(5, 2):
-    Symmetry  : C(5, 2) = C(5, 3) = 10
-    Row Sum   : Σ C(5, j) for j=0..5 = 2^5 = 32
-    Recurrence: C(5, 2) = C(4, 1) + C(4, 2) = 4 + 6 = 10
-
-========================================================================
+Result:
+  C(5, 2) using DP Table       = 10
+  C(5, 2) using Direct Formula = 10
+----------------------------------------------
 """

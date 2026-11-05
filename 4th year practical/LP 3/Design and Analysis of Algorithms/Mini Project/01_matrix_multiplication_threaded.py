@@ -116,31 +116,24 @@ def threaded_multiply_per_cell(A, B):
 # ═══════════════════════════════════════════════════════════════════════════
 
 def main():
-    print("=" * 70)
-    print("  MATRIX MULTIPLICATION — SINGLE-THREADED vs MULTITHREADED")
-    print("=" * 70)
+    print("--- Matrix Multiplication: Single-threaded vs Multithreaded ---")
 
     # Small matrix demo
-    print(f"\n{'─' * 70}")
-    print("  DEMO: 3×3 Matrix Multiplication")
-    print(f"{'─' * 70}")
-
+    print("\nDemo: 3x3 Matrix Multiplication")
     A_small = generate_matrix(3, 3)
     B_small = generate_matrix(3, 3)
     print_matrix(A_small, "Matrix A")
     print_matrix(B_small, "Matrix B")
 
     result = standard_multiply(A_small, B_small)
-    print_matrix(result, "Result (A × B)")
+    print_matrix(result, "Result (A x B)")
 
     # Performance comparison with larger matrices
     sizes = [50, 100, 150]
 
-    print(f"\n{'═' * 70}")
-    print("  PERFORMANCE COMPARISON")
-    print(f"{'═' * 70}")
-    print(f"\n  {'Size':<10} {'Standard':<18} {'Thread/Row':<18} {'Thread/Cell':<18}")
-    print(f"  {'─' * 62}")
+    print("\nPerformance Comparison:")
+    print("Size       Standard         Thread/Row       Thread/Cell")
+    print("----------------------------------------------------------")
 
     for n in sizes:
         A = generate_matrix(n, n)
@@ -156,62 +149,48 @@ def main():
         threaded_multiply_per_row(A, B)
         t_row = time.perf_counter() - start
 
-        # Thread per cell (only for smaller sizes due to thread overhead)
+        # Thread per cell
         if n <= 100:
             start = time.perf_counter()
             threaded_multiply_per_cell(A, B)
             t_cell = time.perf_counter() - start
             cell_str = f"{t_cell:.4f}s"
         else:
-            cell_str = "Skipped (too many threads)"
+            cell_str = "Skipped"
 
-        print(f"  {n}×{n:<7} {t_std:.4f}s{'':<10} {t_row:.4f}s{'':<10} {cell_str}")
-
-    print(f"\n{'─' * 70}")
-    print("  ANALYSIS")
-    print(f"{'─' * 70}")
-    print("""
-    1. Standard method is straightforward with O(n³) complexity.
-    2. Thread-per-row creates n threads — moderate overhead.
-    3. Thread-per-cell creates n² threads — high overhead for large matrices.
-    4. Due to Python's GIL (Global Interpreter Lock), multithreading
-       may NOT provide speedup for CPU-bound tasks in Python.
-    5. In languages like C/Java, thread-per-row shows significant speedup.
-    6. Thread-per-cell has excessive overhead and is usually slower.
-    """)
-    print(f"{'═' * 70}\n")
+        print(f"{n}x{n:<7} {t_std:.4f}s{'':<10} {t_row:.4f}s{'':<10} {cell_str}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- Matrix Multiplication: Single-threaded vs Multithreaded ---
 
-  DEMO: 3×3 Matrix Multiplication
+Demo: 3x3 Matrix Multiplication
+
   Matrix A:
     [3, 7, 2]
     [5, 1, 8]
     [4, 6, 9]
+
   Matrix B:
     [1, 4, 6]
     [8, 2, 3]
     [5, 7, 1]
-  Result (A × B):
+
+  Result (A x B):
     [69, 40, 41]
     [53, 78, 41]
     [97, 91, 51]
 
-  PERFORMANCE COMPARISON
-  Size       Standard           Thread/Row         Thread/Cell
-  50×50      0.0125s            0.0134s            0.0892s
-  100×100    0.0982s            0.0745s            0.9124s
-  150×150    0.3214s            0.2485s            Skipped
-
-  ANALYSIS
-    Standard is straightforward with O(n³) complexity.
-    Thread-per-row creates n threads — moderate overhead.
-    Thread-per-cell creates n² threads — excessive overhead.
-
-========================================================================
+Performance Comparison:
+Size       Standard         Thread/Row       Thread/Cell
+----------------------------------------------------------
+50x50      0.0125s          0.0134s          0.0892s
+100x100    0.0982s          0.0745s          0.9124s
+150x150    0.3214s          0.2485s          Skipped
+----------------------------------------------
 """

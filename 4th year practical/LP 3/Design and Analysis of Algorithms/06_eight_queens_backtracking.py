@@ -76,117 +76,79 @@ def solve_queens(board, col, solutions):
             board[row][col] = 0           # backtrack
 
 
-def print_board(board, solution_num=None):
-    """Display the chessboard in a visually clear format."""
-    if solution_num is not None:
-        print(f"\n  ── Solution {solution_num} {'─' * 40}")
-
-    print(f"\n       {'   '.join(str(c + 1) for c in range(BOARD_SIZE))}")
-    print(f"     ┌{'───┬' * (BOARD_SIZE - 1)}───┐")
-
-    for i in range(BOARD_SIZE):
-        row_str = f"  {i + 1}  │"
-        for j in range(BOARD_SIZE):
-            if board[i][j] == 1:
-                row_str += " Q │"
-            else:
-                row_str += " · │"
-        print(row_str)
-
-        if i < BOARD_SIZE - 1:
-            print(f"     ├{'───┼' * (BOARD_SIZE - 1)}───┤")
-
-    print(f"     └{'───┴' * (BOARD_SIZE - 1)}───┘")
+def print_board(board):
+    """Display the chessboard simply using Q and dots."""
+    for row in board:
+        print("  " + " ".join("Q" if cell == 1 else "." for cell in row))
 
 
 def main():
-    print("=" * 60)
-    print("   8-QUEENS PROBLEM — BACKTRACKING")
-    print("=" * 60)
-
-    print("\n  Place the first Queen on the board [Press Enter for default: (1, 1)].")
-    user_row = input("  Enter row    (1-8) [Default: 1]: ").strip()
-    row = (int(user_row) - 1) if user_row else 0
-    user_col = input("  Enter column (1-8) [Default: 1]: ").strip()
-    col = (int(user_col) - 1) if user_col else 0
+    print("--- 8-Queens Problem (Backtracking with First Queen Placed) ---")
+    row = int(input("Enter row of first queen (1-8): ")) - 1
+    col = int(input("Enter col of first queen (1-8): ")) - 1
 
     if not (0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE):
-        print("\n  [Error] Row and column must be between 1 and 8.")
+        print("Error: Row and column must be between 1 and 8.")
         return
 
     # Initialize the board and place the first queen
     board = [[0] * BOARD_SIZE for _ in range(BOARD_SIZE)]
     board[row][col] = 1
 
-    print(f"\n  First Queen placed at ({row + 1}, {col + 1})")
-    print_board(board)
+    print(f"\nFirst queen placed at: Row {row + 1}, Col {col + 1}")
 
-    # ── Solve using Backtracking ─────────────────────────────────────────
+    # Solve using Backtracking
     solutions = []
     solve_queens(board, 0, solutions)
 
-    # ── Display Results ──────────────────────────────────────────────────
     if not solutions:
-        print(f"\n{'═' * 60}")
-        print("  No valid solution exists with the first Queen at "
-              f"({row + 1}, {col + 1}).")
-        print(f"{'═' * 60}\n")
+        print("No valid solution found with the first queen at this position.")
         return
 
-    print(f"\n{'═' * 60}")
-    print(f"  TOTAL SOLUTIONS FOUND: {len(solutions)}")
-    print(f"{'═' * 60}")
+    print(f"\nTotal solutions found: {len(solutions)}")
+    print("\nSolution 1 Board:")
+    print_board(solutions[0])
 
-    # Show the first solution in detail
-    print_board(solutions[0], solution_num=1)
-
-    # Show queen positions for the first solution
-    print(f"\n  Queen Positions (Solution 1):")
-    print(f"  {'─' * 30}")
-    queen_num = 1
+    print("\nQueen Positions (Row, Col):")
     for i in range(BOARD_SIZE):
         for j in range(BOARD_SIZE):
             if solutions[0][i][j] == 1:
-                marker = " ← First Queen" if (i == row and j == col) else ""
-                print(f"    Queen {queen_num}: Row {i + 1}, Col {j + 1}{marker}")
-                queen_num += 1
-
-    # If more solutions exist, show a summary
-    if len(solutions) > 1:
-        print(f"\n  Showing up to 3 more solutions:")
-        for idx in range(1, min(4, len(solutions))):
-            print_board(solutions[idx], solution_num=idx + 1)
-
-    print(f"\n{'═' * 60}")
-    print(f"  Total valid configurations with Q1 at "
-          f"({row + 1}, {col + 1}): {len(solutions)}")
-    print(f"{'═' * 60}\n")
+                fixed = " (First Queen)" if (i == row and j == col) else ""
+                print(f"  Row {i + 1}, Col {j + 1}{fixed}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- 8-Queens Problem (Backtracking with First Queen Placed) ---
+Enter row of first queen (1-8): 1
+Enter col of first queen (1-8): 1
 
-  Enter row (1-8): 1
-  Enter column (1-8): 1
+First queen placed at: Row 1, Col 1
 
-  First Queen placed at (1, 1)
+Total solutions found: 4
 
-  TOTAL SOLUTIONS FOUND: 4
+Solution 1 Board:
+  Q . . . . . . .
+  . . . . . . Q .
+  . . . . Q . . .
+  . . . . . . . Q
+  . Q . . . . . .
+  . . . Q . . . .
+  . . . . . Q . .
+  . . Q . . . . .
 
-  Queen Positions (Solution 1):
-    Queen 1: Row 1, Col 1  ← First Queen
-    Queen 2: Row 2, Col 7
-    Queen 3: Row 3, Col 5
-    Queen 4: Row 4, Col 8
-    Queen 5: Row 5, Col 2
-    Queen 6: Row 6, Col 4
-    Queen 7: Row 7, Col 6
-    Queen 8: Row 8, Col 3
-
-  Total valid configurations with Q1 at (1, 1): 4
-
-========================================================================
+Queen Positions (Row, Col):
+  Row 1, Col 1 (First Queen)
+  Row 2, Col 7
+  Row 3, Col 5
+  Row 4, Col 8
+  Row 5, Col 2
+  Row 6, Col 4
+  Row 7, Col 6
+  Row 8, Col 3
+----------------------------------------------
 """

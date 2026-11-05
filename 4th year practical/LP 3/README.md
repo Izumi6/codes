@@ -49,6 +49,7 @@ LP 3/
 │
 ├── Design and Analysis of Algorithms/
 │   ├── 01_fibonacci_step_count.py
+│   ├── 02_huffman_encoding_greedy.py
 │   ├── 02_job_sequencing_greedy.py
 │   ├── 03_fractional_knapsack_greedy.py
 │   ├── 04_01_knapsack_dp_bb.py

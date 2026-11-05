@@ -115,123 +115,46 @@ def rabin_karp(text, pattern, prime=101):
 # ═══════════════════════════════════════════════════════════════════════════
 
 def main():
-    print("=" * 70)
-    print("  NAIVE STRING MATCHING vs RABIN-KARP ALGORITHM")
-    print("=" * 70)
+    print("--- String Matching: Naive vs Rabin-Karp ---")
 
-    # ── Test Cases ──────────────────────────────────────────────────────
     test_cases = [
-        ("AABAACAADAABAABA", "AABA", "Normal text"),
-        ("AAAAAAAAAAAAAAA", "AAAA", "Worst case (all matches)"),
-        ("ABCDEFGHIJKLMNO", "XYZ", "No match found"),
-        ("ABABABABABABAB", "ABAB", "Overlapping patterns"),
-        ("GEEKS FOR GEEKS", "GEEKS", "Text with spaces"),
+        ("AABAACAADAABAABA", "AABA"),
+        ("ABCDEFGHIJKLMNO", "XYZ"),
+        ("ABABABABABABAB", "ABAB")
     ]
 
-    for text, pattern, description in test_cases:
-        print(f"\n{'─' * 70}")
-        print(f"  Test: {description}")
-        print(f"{'─' * 70}")
-        print(f"  Text    : \"{text}\"")
-        print(f"  Pattern : \"{pattern}\"")
+    for text, pattern in test_cases:
+        print(f"\nText   : {text}")
+        print(f"Pattern: {pattern}")
 
-        # Naive
-        start = time.perf_counter()
         naive_pos, naive_comp = naive_string_match(text, pattern)
-        t_naive = time.perf_counter() - start
-
-        # Rabin-Karp
-        start = time.perf_counter()
         rk_pos, rk_comp = rabin_karp(text, pattern)
-        t_rk = time.perf_counter() - start
 
-        print(f"\n  {'Method':<20} {'Positions Found':<25} {'Comparisons':<15} {'Time':<12}")
-        print(f"  {'─' * 65}")
-        print(f"  {'Naive':<20} {str(naive_pos):<25} {naive_comp:<15} {t_naive:.6f}s")
-        print(f"  {'Rabin-Karp':<20} {str(rk_pos):<25} {rk_comp:<15} {t_rk:.6f}s")
-
-        if naive_pos:
-            print(f"\n  Pattern found at indices: {naive_pos}")
-        else:
-            print(f"\n  Pattern NOT found in text.")
-
-    # ── Performance on large input ──────────────────────────────────────
-    print(f"\n{'═' * 70}")
-    print("  PERFORMANCE ON LARGE INPUT")
-    print(f"{'═' * 70}")
-
-    sizes = [10000, 50000, 100000]
-
-    print(f"\n  {'Size':<12} {'Pattern':<12} {'Naive Time':<15} {'RK Time':<15} {'Naive Comp':<12} {'RK Comp':<12}")
-    print(f"  {'─' * 70}")
-
-    for n in sizes:
-        text = "AB" * (n // 2)
-        pattern = "ABAB"
-
-        start = time.perf_counter()
-        _, n_comp = naive_string_match(text, pattern)
-        t_naive = time.perf_counter() - start
-
-        start = time.perf_counter()
-        _, r_comp = rabin_karp(text, pattern)
-        t_rk = time.perf_counter() - start
-
-        print(f"  {n:<12} {'ABAB':<12} {t_naive:<15.4f} {t_rk:<15.4f} {n_comp:<12} {r_comp:<12}")
-
-    print(f"\n{'─' * 70}")
-    print("  ANALYSIS & OBSERVATIONS")
-    print(f"{'─' * 70}")
-    print("""
-    1. Naive Algorithm:
-       • Slides pattern one position at a time and compares all characters.
-       • Simple but inefficient for large texts.
-       • Time: O(n*m) worst case, O(n) best case.
-
-    2. Rabin-Karp Algorithm:
-       • Uses rolling hash to quickly skip non-matching positions.
-       • Only compares characters when hash values match.
-       • Time: O(n+m) average case, O(n*m) worst case (hash collisions).
-
-    3. Key Differences:
-       • Rabin-Karp performs fewer character comparisons due to hashing.
-       • Rabin-Karp has overhead for hash computation.
-       • For short patterns, Naive may be faster (less overhead).
-       • For long texts with few matches, Rabin-Karp is significantly faster.
-       • Both algorithms find the same set of matching positions.
-    """)
-    print(f"{'═' * 70}\n")
+        print(f"Naive      -> Found at indices: {naive_pos}, Comparisons: {naive_comp}")
+        print(f"Rabin-Karp -> Found at indices: {rk_pos}, Comparisons: {rk_comp}")
 
 
 if __name__ == "__main__":
     main()
 
 """
-============================== SAMPLE OUTPUT ==============================
+SAMPLE OUTPUT:
+----------------------------------------------
+--- String Matching: Naive vs Rabin-Karp ---
 
-  Test: Normal text
-  Text    : "AABAACAADAABAABA"
-  Pattern : "AABA"
+Text   : AABAACAADAABAABA
+Pattern: AABA
+Naive      -> Found at indices: [0, 9, 12], Comparisons: 22
+Rabin-Karp -> Found at indices: [0, 9, 12], Comparisons: 12
 
-  Method               Positions Found           Comparisons     Time
-  Naive                [0, 9, 12]                22              0.000005s
-  Rabin-Karp           [0, 9, 12]                12              0.000008s
+Text   : ABCDEFGHIJKLMNO
+Pattern: XYZ
+Naive      -> Found at indices: [], Comparisons: 13
+Rabin-Karp -> Found at indices: [], Comparisons: 0
 
-  Pattern found at indices: [0, 9, 12]
-
-  Test: Worst case (all matches)
-  Text    : "AAAAAAAAAAAAAAA"
-  Pattern : "AAAA"
-
-  Method               Positions Found           Comparisons     Time
-  Naive                [0, 1, 2, ..., 11]        48              0.000006s
-  Rabin-Karp           [0, 1, 2, ..., 11]        48              0.000009s
-
-  PERFORMANCE ON LARGE INPUT
-  Size         Pattern      Naive Time      RK Time
-  10000        ABAB         0.0089          0.0045
-  50000        ABAB         0.0432          0.0198
-  100000       ABAB         0.0891          0.0402
-
-========================================================================
+Text   : ABABABABABABAB
+Pattern: ABAB
+Naive      -> Found at indices: [0, 2, 4, 6, 8, 10], Comparisons: 34
+Rabin-Karp -> Found at indices: [0, 2, 4, 6, 8, 10], Comparisons: 24
+----------------------------------------------
 """

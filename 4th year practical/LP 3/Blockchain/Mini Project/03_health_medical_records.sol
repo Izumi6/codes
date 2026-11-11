@@ -1,33 +1,10 @@
 // SPDX-License-Identifier: MIT
-// ============================================================================
-//   Mini Project: Blockchain-Based Electronic Health Records (EHR) System
-//   Course: Blockchain Technology
-//
-//   Problem Statement:
-//     Develop a Blockchain based application for health related medical records.
-//
-//   Description:
-//     A patient-centric decentralized Electronic Health Record (EHR) management
-//     system. Patients maintain full sovereignty over their private medical records,
-//     granting and revoking access permissions to certified doctors. Authorized doctors
-//     can append tamper-proof medical records (diagnoses, prescriptions, and IPFS
-//     hashes of diagnostic scans) to the patient's immutable blockchain history.
-//
-//   Key Features:
-//     • Hospital/Admin registers verified certified medical practitioners
-//     • Patient self-registration with essential medical information
-//     • Granular Access Control: Patients explicitly authorize or revoke doctor access
-//     • Tamper-proof Medical Records: Diagnostic data & IPFS document hashes are immutable
-//     • Full Audit Trail: Complete event logging of record additions and permission grants
-//
-//   Deployment & Testing in Remix IDE:
-//     1. Open https://remix.ethereum.org/
-//     2. Create a new file "03_health_medical_records.sol" and paste this code
-//     3. Solidity Compiler: Choose version 0.8.19 or higher -> Click "Compile"
-//     4. Deploy: Select "Remix VM" -> Click "Deploy" with Account 1 (Hospital Admin)
-// ============================================================================
-
 pragma solidity ^0.8.0;
+
+/*
+  Mini Project: Blockchain-Based Electronic Health Records (EHR) System
+  Course: Blockchain Technology
+*/
 
 contract HealthMedicalRecords {
 

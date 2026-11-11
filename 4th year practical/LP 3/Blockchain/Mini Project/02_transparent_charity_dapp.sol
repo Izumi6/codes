@@ -1,35 +1,10 @@
 // SPDX-License-Identifier: MIT
-// ============================================================================
-//   Mini Project: Transparent and Genuine Charity Platform (dApp)
-//   Course: Blockchain Technology
-//
-//   Problem Statement:
-//     Develop a Blockchain based application for transparent and genuine charity.
-//
-//   Description:
-//     A decentralized smart contract ensuring full financial transparency for
-//     charitable fundraising. Donors can donate ETH to verified campaigns, track
-//     exact fund utilization, and vote on spending requests before funds are
-//     released to beneficiaries or vendors.
-//
-//   Key Features:
-//     • Admin verifies and registers legitimate charitable campaigns
-//     • Transparent donations: anyone can audit campaign balances and donor history
-//     • Milestone Spending Requests: Charity managers cannot withdraw funds arbitrarily;
-//       they must submit spending requests with stated recipient & amount
-//     • Donor Voting: Donors vote to approve spending requests, preventing embezzlement
-//     • Automatic Refund: Donors can reclaim funds if campaign fails to reach minimum goal
-//
-//   Deployment & Testing in Remix IDE:
-//     1. Open https://remix.ethereum.org/
-//     2. Create a new file "02_transparent_charity_dapp.sol" and paste this code
-//     3. Solidity Compiler: Choose version 0.8.19 or higher -> Click "Compile"
-//     4. Deploy & Run Transactions:
-//        - Environment: "Remix VM (Shanghai/Cancun)"
-//        - Click "Deploy" using Account 1 (Admin)
-// ============================================================================
-
 pragma solidity ^0.8.0;
+
+/*
+  Mini Project: Transparent and Genuine Charity Platform (dApp)
+  Course: Blockchain Technology
+*/
 
 contract TransparentCharity {
 

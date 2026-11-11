@@ -1,27 +1,10 @@
 // SPDX-License-Identifier: MIT
-// ============================================================================
-//   Mini Project: E-Voting System (dApp)
-//   Course: Blockchain Technology
-//
-//   Description:
-//     A simple decentralized application (dApp) smart contract for an E-Voting 
-//     system. It allows the admin to register voters and add candidates. 
-//     Registered voters can cast one vote each. Anyone can view the results.
-//
-//   Features:
-//     • Admin control (Owner only functions)
-//     • Voter registration to prevent unauthorized voting
-//     • Vote tracking to ensure one vote per registered user
-//     • Transparent and immutable vote counting
-//
-//   Deployment & Testing:
-//     1. Open Remix IDE: https://remix.ethereum.org/
-//     2. Create a new file "EVoting.sol" → Paste this code
-//     3. Compile: Select Solidity compiler 0.8.x → Compile
-//     4. Deploy: Environment → "Remix VM"
-// ============================================================================
-
 pragma solidity ^0.8.0;
+
+/*
+  Mini Project: E-Voting System (dApp)
+  Course: Blockchain Technology
+*/
 
 contract EVoting {
 

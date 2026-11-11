@@ -1,10 +1,10 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
 /*
   Mini Project: Transparent and Genuine Charity Platform (dApp)
   Course: Blockchain Technology
 */
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract TransparentCharity {
 

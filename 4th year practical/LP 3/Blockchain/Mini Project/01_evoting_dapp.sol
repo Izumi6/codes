@@ -1,10 +1,10 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
 /*
   Mini Project: E-Voting System (dApp)
   Course: Blockchain Technology
 */
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract EVoting {
 

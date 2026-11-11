@@ -1,6 +1,3 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
 /*
   Program 3: Bank Account Smart Contract
   Course: Blockchain Technology (LP-III)
@@ -12,6 +9,9 @@ pragma solidity ^0.8.0;
       - Withdraw money
       - Show balance
 */
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract BankAccount {
 

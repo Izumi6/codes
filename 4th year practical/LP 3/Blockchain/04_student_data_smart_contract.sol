@@ -1,6 +1,3 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
 /*
   Program 4: Student Data Smart Contract
   Course: Blockchain Technology (LP-III)
@@ -12,6 +9,9 @@ pragma solidity ^0.8.0;
       - Fallback
     Deploy this as smart contract on Ethereum and observe transaction fee and gas values.
 */
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract StudentData {
 

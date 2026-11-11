@@ -1,10 +1,10 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
 /*
   Mini Project: Blockchain-Based Electronic Health Records (EHR) System
   Course: Blockchain Technology
 */
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract HealthMedicalRecords {
 
